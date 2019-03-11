@@ -9,4 +9,8 @@ a hack to deal with our current css styles and no new styling should be added in
     position: relative;
 }
 
-.CodeMirror pre, .output pre { font-family: "Ricty Diminished", monospace; }
+.CodeMirror pre, .output pre {
+	font-family: "Ricty Diminished", monospace;
+	font-size: 13pt;
+	line-height: 1.2 !important;
+}
