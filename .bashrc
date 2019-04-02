@@ -150,3 +150,7 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+if which colordiff > /dev/null 2>&1; then
+	alias diff='colordiff'
+fi
+
