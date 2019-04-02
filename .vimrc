@@ -5,7 +5,6 @@ set helplang=ja,en
 
 
 call plug#begin('~/.vim/plugged')
-Plug 'vim-ruby/vim-ruby'
 Plug 'vim-jp/vimdoc-ja'
 Plug 'itchyny/lightline.vim'
 
