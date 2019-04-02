@@ -1,0 +1,14 @@
+[user]
+	name = akannke
+	email = psse111@gmail.com
+[core]
+	editor = vim
+[alias]
+	ci = commit
+	st = status
+	br = branch
+	co = checkout
+[pull]
+[merge]
+[pull]
+	ff = only
