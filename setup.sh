@@ -25,6 +25,18 @@ EOF
 	exit 1
 }
 
+while getopts f:h opt; do
+	case ${opt} in
+		f)
+			OVERWRITE=true
+			;;
+		h)
+			usage
+			;;
+	esac
+done
+shift $((OPTIND - 1))
+
 if [ ! -d ${DOT_DIRECTORY} ]; then
 	echo "Downloading dotfiles..."
 	mkdir ${DOT_DIRECTORY}
