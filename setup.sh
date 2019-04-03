@@ -41,7 +41,11 @@ fi
 vim_init(){
 	if [ ! -d ${HOME}/.vim ]; then
 		echo "Downloading vim-plug"
-		curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+		if has "nvim"; then
+				curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+		else
+				curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+		fi
 	fi
 }
 
