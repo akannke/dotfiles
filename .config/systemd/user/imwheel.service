@@ -1,0 +1,12 @@
+[Unit]
+Description=imwheel
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/imwheel
+ExecStop=/usr/bin/pkill imwheel
+RemainAfterExit=yes
+Restart=always
+
+[Install]
+WantedBy=graphical.target
