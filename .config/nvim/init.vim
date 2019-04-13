@@ -16,6 +16,8 @@ inoremap <C-j> <C-x><C-o>
 
 " x でヤンクしない
 nnoremap x "_x
+nnoremap j gj
+nnoremap k gk
 
 tnoremap <Esc> <C-\><C-n>
 
