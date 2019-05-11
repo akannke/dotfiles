@@ -8,6 +8,11 @@ set helplang=ja,en
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'vim-jp/vimdoc-ja'
 Plug 'itchyny/lightline.vim'
+Plug 'fatih/vim-go'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': './install.sh'
+    \ }
 
 call plug#end()
 
@@ -29,6 +34,15 @@ tnoremap <Esc> <C-\><C-n>
 " filetype plugin on
 
 
+let g:LanguageClient_serverCommands = {
+	\ 'haskell': ['hie-wrapper'],
+	\ }
 
-
-
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+map <Leader>lk :call LanguageClient#textDocument_hover()<CR>
+map <Leader>lg :call LanguageClient#textDocument_definition()<CR>
+map <Leader>lr :call LanguageClient#textDocument_rename()<CR>
+map <Leader>lf :call LanguageClient#textDocument_formatting()<CR>
+map <Leader>lb :call LanguageClient#textDocument_references()<CR>
+map <Leader>la :call LanguageClient#textDocument_codeAction()<CR>
+map <Leader>ls :call LanguageClient#textDocument_documentSymbol()<CR>
