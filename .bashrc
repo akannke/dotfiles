@@ -124,9 +124,6 @@ GIT_PS1_SHOWUNTRACKEDFILES=true
 GIT_PS1_SHOWSTASHSTATE=true
 GIT_PS1_SHOWUPSTREAM=auto
 
-# ls colos
-eval `dircolors ~/dircolorsdb/dircolors-solarized/dircolors.ansi-dark`
-
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if type pyenv 1>/dev/null 2>&1; then
