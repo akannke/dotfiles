@@ -133,22 +133,6 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
-export PATH="$PYENV_ROOT/versions/anaconda3-5.3.1/bin/:$PATH"
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/poinap/.pyenv/versions/anaconda3-5.3.1/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/poinap/.pyenv/versions/anaconda3-5.3.1/etc/profile.d/conda.sh" ]; then
-        . "/home/poinap/.pyenv/versions/anaconda3-5.3.1/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/poinap/.pyenv/versions/anaconda3-5.3.1/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
 
 if which colordiff > /dev/null 2>&1; then
 	alias diff='colordiff'
@@ -160,3 +144,4 @@ if type go >/dev/null 2>&1; then
 	export PATH=$GOPATH/bin:$PATH
 fi
 
+export PATH=$(stack path --local-bin):$PATH
