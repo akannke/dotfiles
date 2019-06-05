@@ -24,7 +24,7 @@ Plug 'prabirshrestha/async.vim'
 call plug#end()
 
 " オムニ補完
-inoremap <C-j> <C-x><C-o>
+inoremap <C-Space> <C-x><C-o>
 
 " x でヤンクしない
 nnoremap x "_x
@@ -58,6 +58,8 @@ map <Leader>la :call LanguageClient#textDocument_codeAction()<CR>
 map <Leader>ls :call LanguageClient#textDocument_documentSymbol()<CR>
 
 " python-language-server用の設定
+let g:python3_host_prog = '/home/ubuntu/.pyenv/versions/neo/bin/python'
+
 " デバッグ用設定
 let g:lsp_log_verbose = 1  " デバッグ用ログを出力
 let g:lsp_log_file = expand('~/.cache/tmp/vim-lsp.log')  " ログ出力のPATHを設定
@@ -98,4 +100,6 @@ function! s:configure_lsp() abort
 	nnoremap <buffer> <F2> :<C-u>LspRename<CR>
 endfunction
 let g:lsp_diagnostics_enabled = 0  " 警告やエラーの表示はALEに任せるのでOFFにする
+
+
 
