@@ -4,7 +4,17 @@ set shiftwidth=4
 set belloff=all
 set helplang=ja,en
 set hidden
+colorscheme desert
 
+let mapleader = "\<Space>"
+
+" x でヤンクしない
+nnoremap x "_x
+nnoremap j gj
+nnoremap k gk
+nnoremap L $
+
+nnoremap <silent><Leader>n :NERDTreeToggle<CR>
 
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'vim-jp/vimdoc-ja'
@@ -21,24 +31,31 @@ Plug 'thinca/vim-quickrun'
 
 Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/async.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'easymotion/vim-easymotion'
+
 call plug#end()
+
+" easy motion
+let g:EasyMotion_do_mapping = 0
+nmap s <Plug>(easymotion-overwin-f2)
+map f <Plug>(easymotion-fl)
+map t <Plug>(easymotion-tl)
+map F <Plug>(easymotion-Fl)
+map T <Plug>(easymotion-Tl)
+
+if 0
+	let g:quickrun_config = {
+				\ "_" : {
+				\ "outputter/buffer/split" : ':rightbelow 8sp'
+				\ }
+				\}
+endif
+
+tnoremap <Esc> <C-\><C-n>
 
 " オムニ補完
 inoremap <C-Space> <C-x><C-o>
-
-" x でヤンクしない
-nnoremap x "_x
-nnoremap j gj
-nnoremap k gk
-nnoremap L $
-
-let g:quickrun_config = {
-			\ "_" : {
-			\ "outputter/buffer/split" : ':rightbelow 8sp'
-			\ }
-			\}
-
-tnoremap <Esc> <C-\><C-n>
 
 filetype plugin indent on
 
@@ -46,7 +63,6 @@ let g:LanguageClient_serverCommands = {
 			\ 'haskell': ['hie-wrapper', '-d', '-l', '/tmp/hie.log'],
 			\ }
 
-let mapleader = "\<Space>"
 
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 map <Leader>lk :call LanguageClient#textDocument_hover()<CR>
@@ -58,11 +74,11 @@ map <Leader>la :call LanguageClient#textDocument_codeAction()<CR>
 map <Leader>ls :call LanguageClient#textDocument_documentSymbol()<CR>
 
 " python-language-server用の設定
-let g:python3_host_prog = '/home/ubuntu/.pyenv/versions/neo/bin/python'
+" let g:python3_host_prog = '/home/ubuntu/.pyenv/versions/neo/bin/python'
 
 " デバッグ用設定
 let g:lsp_log_verbose = 1  " デバッグ用ログを出力
-let g:lsp_log_file = expand('~/.cache/tmp/vim-lsp.log')  " ログ出力のPATHを設定
+let g:lsp_log_file = expand('~/.cache/vim/vim-lsp.log')  " ログ出力のPATHを設定
 
 " 言語用Serverの設定
 augroup MyLsp
@@ -84,6 +100,7 @@ augroup MyLsp
 		autocmd FileType python call s:configure_lsp()
 	endif
 augroup END
+
 " 言語ごとにServerが実行されたらする設定を関数化
 function! s:configure_lsp() abort
 	setlocal omnifunc=lsp#complete   " オムニ補完を有効化
@@ -101,5 +118,5 @@ function! s:configure_lsp() abort
 endfunction
 let g:lsp_diagnostics_enabled = 0  " 警告やエラーの表示はALEに任せるのでOFFにする
 
-
+inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<C-x>\<C-o>"
 
