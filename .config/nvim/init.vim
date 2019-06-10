@@ -13,6 +13,7 @@ nnoremap x "_x
 nnoremap j gj
 nnoremap k gk
 nnoremap L $
+nnoremap 0 ^
 
 nnoremap <silent><Leader>n :NERDTreeToggle<CR>
 
@@ -37,12 +38,17 @@ Plug 'easymotion/vim-easymotion'
 call plug#end()
 
 " easy motion
-let g:EasyMotion_do_mapping = 0
 nmap s <Plug>(easymotion-overwin-f2)
-map f <Plug>(easymotion-fl)
-map t <Plug>(easymotion-tl)
-map F <Plug>(easymotion-Fl)
-map T <Plug>(easymotion-Tl)
+nmap <Leader>s <Plug>(easymotion-overwin-f)
+map f <Plug>(easymotion-bd-fl)
+map t <Plug>(easymotion-bd-tl)
+map <Leader>j <Plug>(easymotion-bd-jk)
+" map <Leader>k <Plug>(easymotion-sol-k)
+map <Leader>k <Plug>(easymotion-overwin-line)
+" map f <Plug>(easymotion-fl)
+" map t <Plug>(easymotion-tl)
+" map F <Plug>(easymotion-Fl)
+" map T <Plug>(easymotion-Tl)
 
 if 0
 	let g:quickrun_config = {
@@ -94,7 +100,7 @@ augroup MyLsp
 					\ 'cmd': { server_info -> ['pyls'] },
 					\ 'whitelist': ['python'],
 					\ 'workspace_config': {'pyls': {'plugins': {
-					\   'pycodestyle': {'enabled': v:false},
+					\   'pycodestyle': {'enabled': v:true},
 					\   'jedi_definition': {'follow_imports': v:true, 'follow_builtin_imports': v:true},}}}
 					\})
 		autocmd FileType python call s:configure_lsp()
