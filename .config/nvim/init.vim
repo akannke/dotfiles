@@ -38,6 +38,8 @@ Plug 'easymotion/vim-easymotion'
 call plug#end()
 
 " easy motion
+" 大文字小文字を区別しない
+let g:EasyMotion_smartcase = 1
 nmap s <Plug>(easymotion-overwin-f2)
 nmap <Leader>s <Plug>(easymotion-overwin-f)
 map f <Plug>(easymotion-bd-fl)
