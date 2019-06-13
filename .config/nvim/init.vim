@@ -85,8 +85,8 @@ map <Leader>ls :call LanguageClient#textDocument_documentSymbol()<CR>
 " let g:python3_host_prog = '/home/ubuntu/.pyenv/versions/neo/bin/python'
 
 " デバッグ用設定
-let g:lsp_log_verbose = 1  " デバッグ用ログを出力
-let g:lsp_log_file = expand('~/.cache/vim/vim-lsp.log')  " ログ出力のPATHを設定
+" let g:lsp_log_verbose = 1  " デバッグ用ログを出力
+" let g:lsp_log_file = expand('~/.cache/vim/vim-lsp.log')  " ログ出力のPATHを設定
 
 " 言語用Serverの設定
 augroup MyLsp
