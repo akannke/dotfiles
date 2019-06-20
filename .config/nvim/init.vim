@@ -3,7 +3,7 @@ set tabstop=4
 set shiftwidth=4
 set belloff=all
 set helplang=ja,en
-set hidden
+set modifiable
 colorscheme desert
 
 let mapleader = "\<Space>"
@@ -47,6 +47,9 @@ map t <Plug>(easymotion-bd-tl)
 map <Leader>j <Plug>(easymotion-bd-jk)
 " map <Leader>k <Plug>(easymotion-sol-k)
 map <Leader>k <Plug>(easymotion-overwin-line)
+map w <Plug>(easymotion-w)
+map b <Plug>(easymotion-b)
+map e <Plug>(easymotion-e)
 " map f <Plug>(easymotion-fl)
 " map t <Plug>(easymotion-tl)
 " map F <Plug>(easymotion-Fl)
