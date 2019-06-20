@@ -4,6 +4,7 @@ set shiftwidth=4
 set belloff=all
 set helplang=ja,en
 set modifiable
+set wildmode=longest:full,full
 colorscheme desert
 
 let mapleader = "\<Space>"
@@ -34,6 +35,7 @@ Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/async.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'easymotion/vim-easymotion'
+Plug 'Rykka/riv.vim'
 
 call plug#end()
 
