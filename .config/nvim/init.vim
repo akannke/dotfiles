@@ -112,6 +112,17 @@ augroup MyLsp
 					\})
 		autocmd FileType python call s:configure_lsp()
 	endif
+
+	if executable('gopls')
+		autocmd User lsp_setup call lsp#register_server({
+					\ 'name': 'go-lang',
+					\ 'cmd': {server_info->['gopls']},
+					\ 'whitelist': ['go'],
+					\ })
+		autocmd FileType go setlocal omnifunc=lsp#complete
+		autocmd FileType go call s:configure_lsp()
+	endif
+
 augroup END
 
 " 言語ごとにServerが実行されたらする設定を関数化
