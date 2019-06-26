@@ -136,8 +136,7 @@ if which colordiff > /dev/null 2>&1; then
 	alias diff='colordiff'
 fi
 
-if [ -d "/usr/local/go/bin" ]; then
-	export PATH=$PATH:/usr/local/go/bin
+if type go >/dev/null 2>&1; then
 	export GOPATH="$(go env GOPATH)"
 	export GOROOT="$(go env GOROOT)"
 	export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
