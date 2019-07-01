@@ -1,13 +1,9 @@
 # Getting the window class string
 # xprop WM_CLASS | grep -o '"[^"]*"' | head -n 1
 
+
 ".*"
+@Priority=-100
 None,    Up,     Button4, 5
 None,    Down,   Button5, 5
 
-"^gnome-terminal-server"
-@Exclude
-
-"^evince"
-# Document viewer
-@Exclude
