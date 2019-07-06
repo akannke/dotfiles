@@ -144,3 +144,5 @@ let g:lsp_diagnostics_enabled = 0  " 警告やエラーの表示はALEに任せ�
 
 inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<C-x>\<C-o>"
 
+let g:riv_global_leader = '<Leader>'
+
