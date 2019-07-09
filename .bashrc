@@ -153,3 +153,12 @@ stty stop undef
 
 export HISTSIZE=10000 # コマンド履歴を増やす
 export HISTFILESIZE=10000
+
+# コマンド履歴の同期
+share_history(){
+	history -a
+	history -c
+	history -r
+}
+PROMPT_COMMAND='share_history'
+shopt -u histappend
