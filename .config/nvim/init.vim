@@ -36,6 +36,8 @@ Plug 'prabirshrestha/async.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'easymotion/vim-easymotion'
 Plug 'Rykka/riv.vim'
+Plug 'tomlion/vim-solidity'
+Plug 'tpope/vim-surround'
 
 call plug#end()
 
