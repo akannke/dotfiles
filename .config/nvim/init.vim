@@ -27,7 +27,7 @@ Plug 'autozimu/LanguageClient-neovim', {
 			\ 'do': './install.sh'
 			\ }
 Plug 'junegunn/fzf'
-Plug 'itchyny/vim-haskell-indent'
+" Plug 'itchyny/vim-haskell-indent'
 Plug 'simeji/winresizer'
 Plug 'thinca/vim-quickrun'
 
@@ -59,6 +59,7 @@ map e <Plug>(easymotion-e)
 " map F <Plug>(easymotion-Fl)
 " map T <Plug>(easymotion-Tl)
 
+" vim-quickrunの設定
 if 0
 	let g:quickrun_config = {
 				\ "_" : {
@@ -66,6 +67,12 @@ if 0
 				\ }
 				\}
 endif
+let g:quickrun_config = {}
+let g:quickrun_config.haskell = {
+			\ 'command' : 'runghc',
+			\ 'exec': ['%c %o %s'],
+			\ 'cmdopt': '-Wall'
+			\ }
 
 tnoremap <Esc> <C-\><C-n>
 
@@ -74,10 +81,13 @@ inoremap <C-Space> <C-x><C-o>
 
 filetype plugin indent on
 
+
+" HaskellのLSP用の設定
 let g:LanguageClient_serverCommands = {
 			\ 'haskell': ['hie-wrapper', '-d', '-l', '/tmp/hie.log'],
 			\ }
 
+set completefunc=LanguageClient#complete
 
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 map <Leader>lk :call LanguageClient#textDocument_hover()<CR>
@@ -121,7 +131,6 @@ augroup MyLsp
 					\ 'cmd': {server_info->['gopls']},
 					\ 'whitelist': ['go'],
 					\ })
-		autocmd FileType go setlocal omnifunc=lsp#complete
 		autocmd FileType go call s:configure_lsp()
 	endif
 
@@ -147,4 +156,5 @@ let g:lsp_diagnostics_enabled = 0  " 警告やエラーの表示はALEに任せ�
 inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<C-x>\<C-o>"
 
 let g:riv_global_leader = '<Leader>'
+
 
