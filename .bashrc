@@ -162,3 +162,6 @@ share_history(){
 }
 PROMPT_COMMAND='share_history'
 shopt -u histappend
+
+# fzf
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
