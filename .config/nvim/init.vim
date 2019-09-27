@@ -5,6 +5,11 @@ set belloff=all
 set helplang=ja,en
 set modifiable
 set wildmode=longest:full,full
+set autoindent
+set smartindent
+set hidden
+set signcolumn=yes
+
 colorscheme desert
 
 let mapleader = "\<Space>"
@@ -15,6 +20,7 @@ nnoremap j gj
 nnoremap k gk
 nnoremap L $
 nnoremap 0 ^
+nnoremap <Leader>f f
 
 nnoremap <silent><Leader>n :NERDTreeToggle<CR>
 
@@ -26,14 +32,15 @@ Plug 'autozimu/LanguageClient-neovim', {
 			\ 'branch': 'next',
 			\ 'do': './install.sh'
 			\ }
+
 Plug 'junegunn/fzf'
-" Plug 'itchyny/vim-haskell-indent'
+Plug 'junegunn/fzf.vim'
+Plug 'itchyny/vim-haskell-indent'
 Plug 'simeji/winresizer'
 Plug 'thinca/vim-quickrun'
 
 Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/async.vim'
-Plug 'scrooloose/nerdtree'
 Plug 'easymotion/vim-easymotion'
 Plug 'Rykka/riv.vim'
 Plug 'tomlion/vim-solidity'
@@ -44,6 +51,7 @@ call plug#end()
 " easy motion
 " 大文字小文字を区別しない
 let g:EasyMotion_smartcase = 1
+let g:EasyMotion_do_mapping = 0
 nmap s <Plug>(easymotion-overwin-f2)
 nmap <Leader>s <Plug>(easymotion-overwin-f)
 map f <Plug>(easymotion-bd-fl)
@@ -78,16 +86,19 @@ tnoremap <Esc> <C-\><C-n>
 
 " オムニ補完
 inoremap <C-Space> <C-x><C-o>
-
+filetype plugin on
 filetype plugin indent on
 
 
 " HaskellのLSP用の設定
+let g:LanguageClient_completionPreferTextEdit = 1
+" let g:LanguageClient_windowLogMessageLevel = "Warning"
+let g:LanguageClient_waitOutputTimeout = 1
+let g:LanguageClient_useVirtualText = 0
+" let g:LanguageClient_changeThrottle = 0.5
 let g:LanguageClient_serverCommands = {
 			\ 'haskell': ['hie-wrapper', '-d', '-l', '/tmp/hie.log'],
 			\ }
-
-set completefunc=LanguageClient#complete
 
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 map <Leader>lk :call LanguageClient#textDocument_hover()<CR>
@@ -156,5 +167,3 @@ let g:lsp_diagnostics_enabled = 0  " 警告やエラーの表示はALEに任せ�
 inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<C-x>\<C-o>"
 
 let g:riv_global_leader = '<Leader>'
-
-

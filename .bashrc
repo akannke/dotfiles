@@ -146,9 +146,6 @@ if type stack 1>/dev/null 2>&1; then
 	export PATH=$(stack path --local-bin):$PATH
 fi
 
-export HISTCONTROL=ignorespace # 空白から始まるコマンドをhistoryに記録しない
-export HISTCONTROL=ignoreboth # 空白のみ+空白から始まるコマンドをhistoryに記録しない
-
 stty stop undef
 
 export HISTSIZE=10000 # コマンド履歴を増やす
@@ -165,3 +162,4 @@ shopt -u histappend
 
 # fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export FZF_COMPLETION_TRIGGER="," # default: '**'
