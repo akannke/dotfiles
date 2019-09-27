@@ -8,7 +8,6 @@ set wildmode=longest:full,full
 set autoindent
 set smartindent
 set hidden
-set signcolumn=yes
 
 colorscheme desert
 
@@ -108,6 +107,9 @@ map <Leader>lf :call LanguageClient#textDocument_formatting()<CR>
 map <Leader>lb :call LanguageClient#textDocument_references()<CR>
 map <Leader>la :call LanguageClient#textDocument_codeAction()<CR>
 map <Leader>ls :call LanguageClient#textDocument_documentSymbol()<CR>
+
+" 左側の帯みたいなやつ
+autocmd Filetype haskell set signcolumn=yes
 
 " python-language-server用の設定
 " let g:python3_host_prog = '/home/ubuntu/.pyenv/versions/neo/bin/python'
