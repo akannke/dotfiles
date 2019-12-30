@@ -44,6 +44,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'Rykka/riv.vim'
 Plug 'tomlion/vim-solidity'
 Plug 'tpope/vim-surround'
+Plug 'sirtaj/vim-openscad'
 
 call plug#end()
 
