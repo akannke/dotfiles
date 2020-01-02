@@ -52,20 +52,12 @@ call plug#end()
 " 大文字小文字を区別しない
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_do_mapping = 0
-nmap s <Plug>(easymotion-overwin-f2)
-nmap <Leader>s <Plug>(easymotion-overwin-f)
-" map f <Plug>(easymotion-bd-fl)
-" map t <Plug>(easymotion-bd-tl)
+nmap s <Plug>(easymotion-overwin-f)
 map <Leader>j <Plug>(easymotion-bd-jk)
-" map <Leader>k <Plug>(easymotion-sol-k)
 map <Leader>k <Plug>(easymotion-overwin-line)
 map w <Plug>(easymotion-w)
 map b <Plug>(easymotion-b)
 map e <Plug>(easymotion-e)
-" map f <Plug>(easymotion-fl)
-" map t <Plug>(easymotion-tl)
-" map F <Plug>(easymotion-Fl)
-" map T <Plug>(easymotion-Tl)
 
 " vim-quickrunの設定
 if 0
