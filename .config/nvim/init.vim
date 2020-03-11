@@ -55,9 +55,9 @@ let g:EasyMotion_do_mapping = 0
 nmap s <Plug>(easymotion-overwin-f)
 map <Leader>j <Plug>(easymotion-bd-jk)
 map <Leader>k <Plug>(easymotion-overwin-line)
-map w <Plug>(easymotion-w)
-map b <Plug>(easymotion-b)
-map e <Plug>(easymotion-e)
+" map w <Plug>(easymotion-w)
+" map b <Plug>(easymotion-b)
+" map e <Plug>(easymotion-e)
 
 " vim-quickrunの設定
 if 0
@@ -104,7 +104,9 @@ map <Leader>ls :call LanguageClient#textDocument_documentSymbol()<CR>
 " 左側の帯みたいなやつ
 autocmd Filetype haskell set signcolumn=yes
 
+
 " python-language-server用の設定
+" ==============================
 " let g:python3_host_prog = '/home/ubuntu/.pyenv/versions/neo/bin/python'
 
 " デバッグ用設定
@@ -158,7 +160,10 @@ function! s:configure_lsp() abort
 	nnoremap <buffer> <F2> :<C-u>LspRename<CR>
 endfunction
 let g:lsp_diagnostics_enabled = 0  " 警告やエラーの表示はALEに任せるのでOFFにする
+let g:lsp_virtual_text_enabled = 0
+let lsp_signature_help_enabled = 0
 
+" tabで補完する
 inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<C-x>\<C-o>"
 
 let g:riv_global_leader = '<Leader>'
