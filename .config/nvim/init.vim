@@ -11,7 +11,7 @@ set hidden
 
 colorscheme desert
 
-let mapleader = "\<Space>"
+let mapleader = ","
 
 " x でヤンクしない
 nnoremap x "_x
@@ -27,24 +27,18 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'vim-jp/vimdoc-ja'
 Plug 'itchyny/lightline.vim'
 Plug 'fatih/vim-go'
-Plug 'autozimu/LanguageClient-neovim', {
-			\ 'branch': 'next',
-			\ 'do': './install.sh'
-			\ }
-
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'itchyny/vim-haskell-indent'
 Plug 'simeji/winresizer'
 Plug 'thinca/vim-quickrun'
 
-Plug 'prabirshrestha/vim-lsp'
-Plug 'prabirshrestha/async.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'Rykka/riv.vim'
 Plug 'tomlion/vim-solidity'
 Plug 'tpope/vim-surround'
 Plug 'sirtaj/vim-openscad'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 
@@ -55,9 +49,6 @@ let g:EasyMotion_do_mapping = 0
 nmap s <Plug>(easymotion-overwin-f)
 map <Leader>j <Plug>(easymotion-bd-jk)
 map <Leader>k <Plug>(easymotion-overwin-line)
-" map w <Plug>(easymotion-w)
-" map b <Plug>(easymotion-b)
-" map e <Plug>(easymotion-e)
 
 " vim-quickrunの設定
 if 0
@@ -76,94 +67,144 @@ let g:quickrun_config.haskell = {
 
 tnoremap <Esc> <C-\><C-n>
 
-" オムニ補完
-inoremap <C-Space> <C-x><C-o>
-filetype plugin on
-filetype plugin indent on
+" ================= coc.nvim =========================
+" TextEdit might fail if hidden is not set.
+set hidden
 
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
 
-" HaskellのLSP用の設定
-let g:LanguageClient_completionPreferTextEdit = 1
-" let g:LanguageClient_windowLogMessageLevel = "Warning"
-let g:LanguageClient_waitOutputTimeout = 1
-let g:LanguageClient_useVirtualText = 0
-" let g:LanguageClient_changeThrottle = 0.5
-let g:LanguageClient_serverCommands = {
-			\ 'haskell': ['hie-wrapper', '-d', '-l', '/tmp/hie.log'],
-			\ }
+" Give more space for displaying messages.
+set cmdheight=2
 
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-map <Leader>lk :call LanguageClient#textDocument_hover()<CR>
-map <Leader>lg :call LanguageClient#textDocument_definition()<CR>
-map <Leader>lr :call LanguageClient#textDocument_rename()<CR>
-map <Leader>lf :call LanguageClient#textDocument_formatting()<CR>
-map <Leader>lb :call LanguageClient#textDocument_references()<CR>
-map <Leader>la :call LanguageClient#textDocument_codeAction()<CR>
-map <Leader>ls :call LanguageClient#textDocument_documentSymbol()<CR>
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
 
-" 左側の帯みたいなやつ
-autocmd Filetype haskell set signcolumn=yes
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
 
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+set signcolumn=yes
 
-" python-language-server用の設定
-" ==============================
-" let g:python3_host_prog = '/home/ubuntu/.pyenv/versions/neo/bin/python'
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-" デバッグ用設定
-" let g:lsp_log_verbose = 1  " デバッグ用ログを出力
-" let g:lsp_log_file = expand('~/.cache/vim/vim-lsp.log')  " ログ出力のPATHを設定
-
-" 言語用Serverの設定
-augroup MyLsp
-	autocmd!
-	" pip install python-language-server
-	if executable('pyls')
-		" Python用の設定を記載
-		" workspace_configで以下の設定を記載
-		" - pycodestyleの設定はALEと重複するので無効にする
-		" - jediの定義ジャンプで一部無効になっている設定を有効化
-		autocmd User lsp_setup call lsp#register_server({
-					\ 'name': 'pyls',
-					\ 'cmd': { server_info -> ['pyls'] },
-					\ 'whitelist': ['python'],
-					\ 'workspace_config': {'pyls': {'plugins': {
-					\   'pycodestyle': {'enabled': v:true},
-					\   'jedi_definition': {'follow_imports': v:true, 'follow_builtin_imports': v:true},}}}
-					\})
-		autocmd FileType python call s:configure_lsp()
-	endif
-
-	if executable('gopls')
-		autocmd User lsp_setup call lsp#register_server({
-					\ 'name': 'go-lang',
-					\ 'cmd': {server_info->['gopls']},
-					\ 'whitelist': ['go'],
-					\ })
-		autocmd FileType go call s:configure_lsp()
-	endif
-
-augroup END
-
-" 言語ごとにServerが実行されたらする設定を関数化
-function! s:configure_lsp() abort
-	setlocal omnifunc=lsp#complete   " オムニ補完を有効化
-	" LSP用にマッピング
-	nnoremap <buffer> <C-]> :<C-u>LspDefinition<CR>
-	nnoremap <buffer> gd :<C-u>LspDefinition<CR>
-	nnoremap <buffer> gD :<C-u>LspReferences<CR>
-	nnoremap <buffer> gs :<C-u>LspDocumentSymbol<CR>
-	nnoremap <buffer> gS :<C-u>LspWorkspaceSymbol<CR>
-	nnoremap <buffer> gQ :<C-u>LspDocumentFormat<CR>
-	vnoremap <buffer> gQ :LspDocumentRangeFormat<CR>
-	nnoremap <buffer> K :<C-u>LspHover<CR>
-	nnoremap <buffer> <F1> :<C-u>LspImplementation<CR>
-	nnoremap <buffer> <F2> :<C-u>LspRename<CR>
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-let g:lsp_diagnostics_enabled = 0  " 警告やエラーの表示はALEに任せるのでOFFにする
-let g:lsp_virtual_text_enabled = 0
-let lsp_signature_help_enabled = 0
 
-" tabで補完する
-inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<C-x>\<C-o>"
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
 
-let g:riv_global_leader = '<Leader>'
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+if has('patch8.1.1068')
+  " Use `complete_info` if your (Neo)Vim version supports it.
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying codeAction to the current line.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Introduce function text object
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
+" Use <TAB> for selections ranges.
+" NOTE: Requires 'textDocument/selectionRange' support from the language server.
+" coc-tsserver, coc-python are the examples of servers that support it.
+nmap <silent> <TAB> <Plug>(coc-range-select)
+xmap <silent> <TAB> <Plug>(coc-range-select)
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add (Neo)Vim's native statusline support.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline.
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Mappings using CoCList:
+" Show all diagnostics.
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
