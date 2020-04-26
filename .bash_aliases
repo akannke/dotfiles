@@ -9,3 +9,6 @@ alias vim='nvim'
 alias crontab='crontab -i'
 alias grep='grep -E'
 # alias solc='docker run --rm -v $(pwd):/solidity ethereum/solc:0.4.24'
+
+# コピペ
+alias pbcopy='xsel --clipboard --input'
