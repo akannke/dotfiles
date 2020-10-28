@@ -27,11 +27,12 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'vim-jp/vimdoc-ja'
 Plug 'itchyny/lightline.vim'
 Plug 'fatih/vim-go'
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
+Plug 'pbogut/fzf-mru.vim'
 Plug 'itchyny/vim-haskell-indent'
 Plug 'simeji/winresizer'
 Plug 'thinca/vim-quickrun'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 Plug 'easymotion/vim-easymotion'
 Plug 'Rykka/riv.vim'
@@ -39,6 +40,7 @@ Plug 'tomlion/vim-solidity'
 Plug 'tpope/vim-surround'
 Plug 'sirtaj/vim-openscad'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'maxmellon/vim-jsx-pretty'
 
 call plug#end()
 
@@ -66,6 +68,16 @@ let g:quickrun_config.haskell = {
 			\ }
 
 tnoremap <Esc> <C-\><C-n>
+
+" Windowの切り替え. Alt+hjklで移動
+tnoremap <A-h> <C-\><C-n><C-w>h
+tnoremap <A-j> <C-\><C-n><C-w>j
+tnoremap <A-k> <C-\><C-n><C-w>k
+tnoremap <A-l> <C-\><C-n><C-w>l
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
 
 " ================= coc.nvim =========================
 " TextEdit might fail if hidden is not set.
@@ -174,8 +186,8 @@ omap af <Plug>(coc-funcobj-a)
 " Use <TAB> for selections ranges.
 " NOTE: Requires 'textDocument/selectionRange' support from the language server.
 " coc-tsserver, coc-python are the examples of servers that support it.
-nmap <silent> <TAB> <Plug>(coc-range-select)
-xmap <silent> <TAB> <Plug>(coc-range-select)
+nmap <silent> <C-s> <Plug>(coc-range-select)
+xmap <silent> <C-s> <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
@@ -194,8 +206,6 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " Mappings using CoCList:
 " Show all diagnostics.
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions.
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
 " Show commands.
 nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document.
@@ -208,3 +218,57 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+" ディレクトリツリーを表示
+nmap <space>e :CocCommand explorer --sources=buffer+,file+<CR>
+
+" coc-pairsで改行時にカーソルを適切な位置に移動
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" coc-metalsの設定
+nmap <Leader>ws <Plug>(coc-metals-expand-decoration)
+au BufRead,BufNewFile *.sbt,*.sc set filetype=scala
+
+" ================= terminal =========================
+nnoremap <silent> <Space>t :call ToggleTerminalMRU()<CR>
+let g:mru_buffer = 1
+let g:mru_buffer_prev = 1
+autocmd bufleave * let g:mru_buffer_prev = bufnr()
+autocmd bufenter *  call SaveMRUBuffer()
+"exec when enter
+function! SaveMRUBuffer() abort
+  if IsNormal(g:mru_buffer_prev)
+    let g:mru_buffer = g:mru_buffer_prev
+  endif
+endfunction
+function! IsNormal(buf_num) abort
+  if (buflisted(a:buf_num) == 1) && (IsTerminal(a:buf_num) == 0)
+    return 1
+  endif
+  return 0
+endfunction
+function! IsTerminal(buf_num) abort
+  let l:term_buf = bufnr("terminal.buffer")
+  if a:buf_num == term_buf
+    return 1
+  endif
+  return 0
+endfunction
+function! ToggleTerminalMRU() abort
+  let l:cur_buf = bufnr()
+  let l:term_buf = bufnr("terminal.buffer")
+  if cur_buf == term_buf
+    if bufexists(g:mru_buffer) == 1
+      execute('buffer '.g:mru_buffer)
+    else
+      :echo "does'nt exist restorable editor"
+    endif
+  else
+    if term_buf == -1
+      execute("terminal")
+      execute("f terminal.buffer")
+    else
+      execute('buffer '.l:term_buf)
+    endif
+  endif
+endfunction
