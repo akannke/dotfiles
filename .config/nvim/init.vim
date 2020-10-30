@@ -11,7 +11,7 @@ set hidden
 
 colorscheme desert
 
-let mapleader = ","
+let mapleader = ','
 
 " x でヤンクしない
 nnoremap x "_x
@@ -20,12 +20,13 @@ nnoremap k gk
 nnoremap L $
 nnoremap 0 ^
 nnoremap <Leader>f f
+" バッファの移動
+nnoremap <silent> <Up> :<C-u>bprev<CR>
+nnoremap <silent> <Down> :<C-u>bnext<CR>
 
-nnoremap <silent><Leader>n :NERDTreeToggle<CR>
 
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'vim-jp/vimdoc-ja'
-Plug 'itchyny/lightline.vim'
 Plug 'fatih/vim-go'
 Plug 'pbogut/fzf-mru.vim'
 Plug 'itchyny/vim-haskell-indent'
@@ -33,15 +34,15 @@ Plug 'simeji/winresizer'
 Plug 'thinca/vim-quickrun'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-
 Plug 'easymotion/vim-easymotion'
 Plug 'Rykka/riv.vim'
 Plug 'tomlion/vim-solidity'
-Plug 'tpope/vim-surround'
 Plug 'sirtaj/vim-openscad'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'maxmellon/vim-jsx-pretty'
-
+Plug 'junegunn/vim-peekaboo'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
 " easy motion
@@ -54,18 +55,18 @@ map <Leader>k <Plug>(easymotion-overwin-line)
 
 " vim-quickrunの設定
 if 0
-	let g:quickrun_config = {
-				\ "_" : {
-				\ "outputter/buffer/split" : ':rightbelow 8sp'
-				\ }
-				\}
+  let g:quickrun_config = {
+        \ '_' : {
+        \ 'outputter/buffer/split' : ':rightbelow 8sp'
+        \ }
+        \}
 endif
 let g:quickrun_config = {}
 let g:quickrun_config.haskell = {
-			\ 'command' : 'runghc',
-			\ 'exec': ['%c %o %s'],
-			\ 'cmdopt': '-Wall'
-			\ }
+      \ 'command' : 'runghc',
+      \ 'exec': ['%c %o %s'],
+      \ 'cmdopt': '-Wall'
+      \ }
 
 tnoremap <Esc> <C-\><C-n>
 
@@ -161,7 +162,7 @@ nmap <leader>f  <Plug>(coc-format-selected)
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  autocmd FileType typescript,json,scala setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder.
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
@@ -198,11 +199,6 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
 " Mappings using CoCList:
 " Show all diagnostics.
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
@@ -229,46 +225,5 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR
 nmap <Leader>ws <Plug>(coc-metals-expand-decoration)
 au BufRead,BufNewFile *.sbt,*.sc set filetype=scala
 
-" ================= terminal =========================
-nnoremap <silent> <Space>t :call ToggleTerminalMRU()<CR>
-let g:mru_buffer = 1
-let g:mru_buffer_prev = 1
-autocmd bufleave * let g:mru_buffer_prev = bufnr()
-autocmd bufenter *  call SaveMRUBuffer()
-"exec when enter
-function! SaveMRUBuffer() abort
-  if IsNormal(g:mru_buffer_prev)
-    let g:mru_buffer = g:mru_buffer_prev
-  endif
-endfunction
-function! IsNormal(buf_num) abort
-  if (buflisted(a:buf_num) == 1) && (IsTerminal(a:buf_num) == 0)
-    return 1
-  endif
-  return 0
-endfunction
-function! IsTerminal(buf_num) abort
-  let l:term_buf = bufnr("terminal.buffer")
-  if a:buf_num == term_buf
-    return 1
-  endif
-  return 0
-endfunction
-function! ToggleTerminalMRU() abort
-  let l:cur_buf = bufnr()
-  let l:term_buf = bufnr("terminal.buffer")
-  if cur_buf == term_buf
-    if bufexists(g:mru_buffer) == 1
-      execute('buffer '.g:mru_buffer)
-    else
-      :echo "does'nt exist restorable editor"
-    endif
-  else
-    if term_buf == -1
-      execute("terminal")
-      execute("f terminal.buffer")
-    else
-      execute('buffer '.l:term_buf)
-    endif
-  endif
-endfunction
+" ================= vim-airline =========================
+let g:airline_theme='wombat'
