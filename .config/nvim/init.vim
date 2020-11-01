@@ -11,7 +11,7 @@ set hidden
 
 colorscheme desert
 
-let mapleader = ','
+let mapleader = "\<Space>"
 
 " x でヤンクしない
 nnoremap x "_x
@@ -23,7 +23,15 @@ nnoremap <Leader>f f
 " バッファの移動
 nnoremap <silent> <Up> :<C-u>bprev<CR>
 nnoremap <silent> <Down> :<C-u>bnext<CR>
+nnoremap <silent> ( :<C-u>bprev<CR>
+nnoremap <silent> ) :<C-u>bnext<CR>
 
+" 一時ファイルを作成して開く、OpenTempfileコマンドを定義
+command! Tempfile :edit `=tempname()`
+
+" pythonのパスを指定
+let g:python_host_prog=$PYENV_ROOT.'/versions/neovim-2/bin/python'
+let g:python3_host_prog=$PYENV_ROOT.'/versions/neovim-3/bin/python'
 
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'vim-jp/vimdoc-ja'
@@ -43,7 +51,17 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'junegunn/vim-peekaboo'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug '907th/vim-auto-save'
 call plug#end()
+
+" ============ vim-auto-save ===========
+let g:auto_save_silent = 1 
+let g:auto_save_in_insert_mode = 0
+let g:auto_save = 0
+augroup autosave
+  autocmd!
+  autocmd FileType scala let b:auto_save = 1
+augroup END
 
 " easy motion
 " 大文字小文字を区別しない
@@ -53,7 +71,9 @@ nmap s <Plug>(easymotion-overwin-f)
 map <Leader>j <Plug>(easymotion-bd-jk)
 map <Leader>k <Plug>(easymotion-overwin-line)
 
-" vim-quickrunの設定
+" ============ vim-quickrunの設定 ==============
+let g:quickrun_no_default_key_mappings = 1
+nmap <leader>rr <Plug>(quickrun)
 if 0
   let g:quickrun_config = {
         \ '_' : {
@@ -227,3 +247,6 @@ au BufRead,BufNewFile *.sbt,*.sc set filetype=scala
 
 " ================= vim-airline =========================
 let g:airline_theme='wombat'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+
