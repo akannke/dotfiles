@@ -19,6 +19,12 @@
 				}
 			}
 		}
-	}
+	},
+	"python.jediEnabled": false,
+	"codeLens.enable": true,
+	"diagnostic.enableMessage": "never",
+	"diagnostic.virtualText": true,
+	"diagnostic.virtualTextCurrentLineOnly": false,
+	"diagnostic.virtualTextPrefix": "‣ "
 }
 
