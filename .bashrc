@@ -163,3 +163,6 @@ shopt -u histappend
 # fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export FZF_COMPLETION_TRIGGER="," # default: '**'
+export PATH="$HOME/.cargo/bin:$PATH"
+
+[[ -s "$HOME/.autojump/etc/profile.d/autojump.sh" ]] && source "$HOME/.autojump/etc/profile.d/autojump.sh"
