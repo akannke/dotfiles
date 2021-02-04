@@ -5,7 +5,7 @@
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
-      *) return;;
+    *) return;;
 esac
 
 # don't put duplicate lines or lines starting with space in the history.
@@ -47,12 +47,12 @@ esac
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+        # We have color support; assume it's compliant with Ecma-48
+        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+        # a case would tend to support setf rather than setaf.)
+        color_prompt=yes
     else
-	color_prompt=
+        color_prompt=
     fi
 fi
 
@@ -65,11 +65,11 @@ unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
+    xterm*|rxvt*)
+        PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+        ;;
+    *)
+        ;;
 esac
 
 # enable color support of ls and also add handy aliases
@@ -109,11 +109,11 @@ fi
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
+    if [ -f /usr/share/bash-completion/bash_completion ]; then
+        . /usr/share/bash-completion/bash_completion
+    elif [ -f /etc/bash_completion ]; then
+        . /etc/bash_completion
+    fi
 fi
 
 # display git status
@@ -127,23 +127,23 @@ GIT_PS1_SHOWUPSTREAM=auto
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if type pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
 fi
 
 
 if which colordiff > /dev/null 2>&1; then
-	alias diff='colordiff'
+    alias diff='colordiff'
 fi
 
 if type go >/dev/null 2>&1; then
-	export GOPATH="$(go env GOPATH)"
-	export GOROOT="$(go env GOROOT)"
-	export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+    export GOPATH="$(go env GOPATH)"
+    export GOROOT="$(go env GOROOT)"
+    export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 fi
 
 if type stack 1>/dev/null 2>&1; then
-	export PATH=$(stack path --local-bin):$PATH
+    export PATH=$(stack path --local-bin):$PATH
 fi
 
 stty stop undef
@@ -153,9 +153,9 @@ export HISTFILESIZE=10000
 
 # コマンド履歴の同期
 share_history(){
-	history -a
-	history -c
-	history -r
+    history -a
+    history -c
+    history -r
 }
 PROMPT_COMMAND='share_history'
 shopt -u histappend
@@ -163,6 +163,26 @@ shopt -u histappend
 # fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export FZF_COMPLETION_TRIGGER="," # default: '**'
+# export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export PATH="$HOME/.cargo/bin:$PATH"
 
 [[ -s "$HOME/.autojump/etc/profile.d/autojump.sh" ]] && source "$HOME/.autojump/etc/profile.d/autojump.sh"
+
+
+# 競プロ用プリコンパイル済みヘッダ
+if [ "$CPLUS_INCLUDE_PATH" = '' ]; then
+    export CPLUS_INCLUDE_PATH=~/.cache/cxxpch/
+else
+    export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:~/.cache/cxxpch/
+fi
+
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/yushi/.sdkman"
+[[ -s "/home/yushi/.sdkman/bin/sdkman-init.sh" ]] && source "/home/yushi/.sdkman/bin/sdkman-init.sh"
+
+source ~/.ghcup/env
+
+
+
+
