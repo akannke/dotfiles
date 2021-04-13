@@ -16,8 +16,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=100000
+HISTFILESIZE=200000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -136,20 +136,13 @@ if which colordiff > /dev/null 2>&1; then
     alias diff='colordiff'
 fi
 
-if type go >/dev/null 2>&1; then
-    export GOPATH="$(go env GOPATH)"
-    export GOROOT="$(go env GOROOT)"
-    export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-fi
+export PATH=$PATH:/usr/local/go/bin
 
 if type stack 1>/dev/null 2>&1; then
     export PATH=$(stack path --local-bin):$PATH
 fi
 
 stty stop undef
-
-export HISTSIZE=10000 # コマンド履歴を増やす
-export HISTFILESIZE=10000
 
 # コマンド履歴の同期
 share_history(){
