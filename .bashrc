@@ -143,7 +143,7 @@ if type go >/dev/null 2>&1; then
 fi
 
 if type stack 1>/dev/null 2>&1; then
-    export PATH=$(stack path --local-bin):$PATH
+    export PATH=$HOME/.local/bin:$PATH
 fi
 
 stty stop undef
