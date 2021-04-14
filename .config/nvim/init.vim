@@ -1,5 +1,6 @@
 set encoding=utf-8
 set tabstop=4
+set expandtab
 set shiftwidth=4
 set belloff=all
 set helplang=ja,en
@@ -8,8 +9,12 @@ set wildmode=longest:full,full
 set autoindent
 set smartindent
 set hidden
+set mouse=a
+set nobackup
+set nowritebackup
 
-colorscheme desert
+filetype plugin indent on
+
 
 let mapleader = "\<Space>"
 
@@ -19,7 +24,7 @@ nnoremap j gj
 nnoremap k gk
 nnoremap L $
 nnoremap 0 ^
-nnoremap <Leader>f f
+
 " バッファの移動
 nnoremap <silent> <Up> :<C-u>bprev<CR>
 nnoremap <silent> <Down> :<C-u>bnext<CR>
@@ -33,9 +38,11 @@ command! Tempfile :edit `=tempname()`
 let g:python_host_prog=$PYENV_ROOT.'/versions/neovim-2/bin/python'
 let g:python3_host_prog=$PYENV_ROOT.'/versions/neovim-3/bin/python'
 
+" ===== vim spector =====
+let g:vimspector_enable_mappings = 'HUMAN'
+
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'vim-jp/vimdoc-ja'
-Plug 'fatih/vim-go'
 Plug 'pbogut/fzf-mru.vim'
 Plug 'itchyny/vim-haskell-indent'
 Plug 'simeji/winresizer'
@@ -44,24 +51,38 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'Rykka/riv.vim'
-Plug 'tomlion/vim-solidity'
+Plug 'thesis/vim-solidity'
 Plug 'sirtaj/vim-openscad'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'maxmellon/vim-jsx-pretty'
-Plug 'junegunn/vim-peekaboo'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug '907th/vim-auto-save'
+Plug 'puremourning/vimspector'
+Plug 'sheerun/vim-polyglot'
+Plug 'sainnhe/gruvbox-material'
 call plug#end()
+" ============= colorscheme =========
+if has('termguicolors')
+    set termguicolors
+endif
+let g:gruvbox_material_background = 'soft'
+colorscheme gruvbox-material
+
+" ============= fzf ============
+nnoremap [Fzf] <Nop>
+nmap <Leader>f [Fzf]
+nnoremap [Fzf]f :<C-u>Files<CR>
+nnoremap [Fzf]: :<C-u>History:<CR>
+nnoremap [Fzf]h :<C-u>History<CR>
+nnoremap [Fzf]c :<C-u>Commands<CR>
+nnoremap [Fzf]m :<C-u>Maps<CR>
+nnoremap [Fzf]b :<C-u>Buffers<CR>
+
 
 " ============ vim-auto-save ===========
-let g:auto_save_silent = 1 
+let g:auto_save_silent = 1
 let g:auto_save_in_insert_mode = 0
-let g:auto_save = 0
-augroup autosave
-  autocmd!
-  autocmd FileType scala let b:auto_save = 1
-augroup END
 
 " easy motion
 " 大文字小文字を区別しない
@@ -74,13 +95,11 @@ map <Leader>k <Plug>(easymotion-overwin-line)
 " ============ vim-quickrunの設定 ==============
 let g:quickrun_no_default_key_mappings = 1
 nmap <leader>rr <Plug>(quickrun)
-if 0
-  let g:quickrun_config = {
-        \ '_' : {
-        \ 'outputter/buffer/split' : ':rightbelow 8sp'
-        \ }
-        \}
-endif
+let g:quickrun_config = {
+      \ '_' : {
+      \ 'outputter/buffer/split' : ':rightbelow 8sp'
+      \ }
+      \}
 let g:quickrun_config = {}
 let g:quickrun_config.haskell = {
       \ 'command' : 'runghc',
@@ -101,12 +120,6 @@ nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
 
 " ================= coc.nvim =========================
-" TextEdit might fail if hidden is not set.
-set hidden
-
-" Some servers have issues with backup files, see #649.
-set nobackup
-set nowritebackup
 
 " Give more space for displaying messages.
 set cmdheight=2
@@ -175,10 +188,6 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
@@ -221,7 +230,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 
 " Mappings using CoCList:
 " Show all diagnostics.
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <space>d  :<C-u>CocList diagnostics<cr>
 " Show commands.
 nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document.
@@ -243,10 +252,20 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR
 
 " coc-metalsの設定
 nmap <Leader>ws <Plug>(coc-metals-expand-decoration)
-au BufRead,BufNewFile *.sbt,*.sc set filetype=scala
+
+augroup SetFileType
+  autocmd!
+  autocmd BufRead,BufNewFile *.sbt,*.sc set filetype=scala
+augroup end
+
+" Make sure `"codeLens.enable": true` is set in your coc config
+nnoremap <leader>l :<C-u>call CocActionAsync('codeLensAction')<CR>
 
 " ================= vim-airline =========================
 let g:airline_theme='wombat'
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#ignore_bufadd_pat = 'defx|gundo|nerd_tree|startify|tagbar|undotree|vimfiler'
+let g:airline_powerline_fonts = 0
 
+" ================= coc-solidity ====================
+set runtimepath^=~/coc-solidity/packages/coc-solidity
