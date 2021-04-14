@@ -137,6 +137,10 @@ if which colordiff > /dev/null 2>&1; then
 fi
 
 export PATH=$PATH:/usr/local/go/bin
+if type go >/dev/null 2>&1; then
+    export GOPATH="$(go env GOPATH)"
+    export PATH=$GOPATH/bin:$PATH
+fi
 
 if type stack 1>/dev/null 2>&1; then
     export PATH=$(stack path --local-bin):$PATH
