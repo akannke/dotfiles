@@ -66,7 +66,7 @@ call plug#end()
 if has('termguicolors')
     set termguicolors
 endif
-let g:gruvbox_material_background = 'soft'
+let g:gruvbox_material_background = 'medium'
 colorscheme gruvbox-material
 
 " ============= fzf ============
