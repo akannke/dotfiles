@@ -132,7 +132,7 @@ if type pyenv 1>/dev/null 2>&1; then
 fi
 
 
-if which colordiff > /dev/null 2>&1; then
+if [[ -x $(which colordiff) ]]; then
     alias diff='colordiff'
 fi
 
