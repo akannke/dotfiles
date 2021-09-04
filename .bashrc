@@ -124,6 +124,8 @@ GIT_PS1_SHOWUNTRACKEDFILES=true
 GIT_PS1_SHOWSTASHSTATE=true
 GIT_PS1_SHOWUPSTREAM=auto
 
+
+export PATH=$HOME/.local/bin:$PATH
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if type pyenv 1>/dev/null 2>&1; then
@@ -140,10 +142,6 @@ export PATH=$PATH:/usr/local/go/bin
 if type go >/dev/null 2>&1; then
     export GOPATH="$(go env GOPATH)"
     export PATH=$GOPATH/bin:$PATH
-fi
-
-if type stack 1>/dev/null 2>&1; then
-    export PATH=$HOME/.local/bin:$PATH
 fi
 
 stty stop undef
