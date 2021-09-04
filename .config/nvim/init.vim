@@ -35,8 +35,8 @@ nnoremap <silent> ) :<C-u>bnext<CR>
 command! Tempfile :edit `=tempname()`
 
 " pythonのパスを指定
-let g:python_host_prog=$PYENV_ROOT.'/versions/neovim-2/bin/python'
-let g:python3_host_prog=$PYENV_ROOT.'/versions/neovim-3/bin/python'
+" let g:python_host_prog=$PYENV_ROOT.'/versions/neovim-2/bin/python'
+let g:python3_host_prog = system('echo -n $(which python3)')
 
 " ===== vim spector =====
 let g:vimspector_enable_mappings = 'HUMAN'
@@ -53,7 +53,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'Rykka/riv.vim'
 Plug 'thesis/vim-solidity'
 Plug 'sirtaj/vim-openscad'
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
