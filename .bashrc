@@ -176,7 +176,9 @@ fi
 export SDKMAN_DIR="/home/yushi/.sdkman"
 [[ -s "/home/yushi/.sdkman/bin/sdkman-init.sh" ]] && source "/home/yushi/.sdkman/bin/sdkman-init.sh"
 
-source ~/.ghcup/env
+if [[ -e "$HOME/.ghcup/env" ]]; then
+    source ~/.ghcup/env
+fi
 
 
 
