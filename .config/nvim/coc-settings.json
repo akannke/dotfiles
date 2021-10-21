@@ -27,7 +27,8 @@
   "coc.preferences.formatOnSaveFiletypes": [
     "scala",
     "haskell",
-    "go"
+    "go",
+    "rust"
   ],
   "python.jediEnabled": false,
   "codeLens.enable": true,
