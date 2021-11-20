@@ -61,6 +61,8 @@ Plug '907th/vim-auto-save'
 Plug 'puremourning/vimspector'
 Plug 'sheerun/vim-polyglot'
 Plug 'sainnhe/gruvbox-material'
+Plug 'vyperlang/vim-vyper'
+Plug 'pearofducks/ansible-vim'
 call plug#end()
 " ============= colorscheme =========
 if has('termguicolors')
@@ -121,7 +123,8 @@ nnoremap <A-l> <C-w>l
 
 " ================= coc.nvim =========================
 
-let g:coc_global_extensions = ['coc-html', 'coc-css', 'coc-tsserver', 'coc-explorer']
+let g:coc_global_extensions = [
+      \ 'coc-html', 'coc-css', 'coc-tsserver', 'coc-explorer', 'coc-docker']
 
 " Give more space for displaying messages.
 set cmdheight=2
@@ -271,3 +274,6 @@ let g:airline_powerline_fonts = 0
 
 " ================= coc-solidity ====================
 set runtimepath^=~/coc-solidity/packages/coc-solidity
+
+" ================= Ansible settings ====================
+au BufRead,BufNewFile */ansible/*.yml set filetype=yaml.ansible
