@@ -12,3 +12,6 @@ alias grep='grep -E'
 
 # コピペ
 alias pbcopy='xsel --clipboard --input'
+
+# fd
+alias fd='fdfind'

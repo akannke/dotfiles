@@ -63,6 +63,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'sainnhe/gruvbox-material'
 Plug 'vyperlang/vim-vyper'
 Plug 'pearofducks/ansible-vim'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 " ============= colorscheme =========
 if has('termguicolors')
@@ -124,7 +125,7 @@ nnoremap <A-l> <C-w>l
 " ================= coc.nvim =========================
 
 let g:coc_global_extensions = [
-      \ 'coc-html', 'coc-css', 'coc-tsserver', 'coc-explorer', 'coc-docker']
+      \ 'coc-html', 'coc-css', 'coc-tsserver', 'coc-explorer', 'coc-docker', 'coc-git']
 
 " Give more space for displaying messages.
 set cmdheight=2
