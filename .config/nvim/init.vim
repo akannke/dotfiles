@@ -25,6 +25,10 @@ nnoremap k gk
 nnoremap L $
 nnoremap 0 ^
 
+" クリップボードからコピペ
+nnoremap <A-y> "+y
+nnoremap <A-p> "+p
+
 " バッファの移動
 nnoremap <silent> <Up> :<C-u>bprev<CR>
 nnoremap <silent> <Down> :<C-u>bnext<CR>
@@ -64,6 +68,7 @@ Plug 'sainnhe/gruvbox-material'
 Plug 'vyperlang/vim-vyper'
 Plug 'pearofducks/ansible-vim'
 Plug 'tpope/vim-fugitive'
+Plug 'caenrique/nvim-toggle-terminal'  " ターミナルを切り替える
 call plug#end()
 " ============= colorscheme =========
 if has('termguicolors')
@@ -278,3 +283,7 @@ set runtimepath^=~/coc-solidity/packages/coc-solidity
 
 " ================= Ansible settings ====================
 au BufRead,BufNewFile */ansible/*.yml set filetype=yaml.ansible
+
+" ================= nvim-toggle-terminal ====================
+nnoremap <silent> <M-t> :ToggleTerminal<Enter>
+tnoremap <silent> <M-t> <C-\><C-n>:ToggleTerminal<Enter>
