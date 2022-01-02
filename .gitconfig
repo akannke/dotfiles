@@ -2,7 +2,7 @@
 	name = akannke
 	email = psse111@gmail.com
 [core]
-	editor = vim
+	editor = nvim
 [alias]
 	ci = commit
 	st = status
