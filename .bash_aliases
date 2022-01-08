@@ -17,3 +17,8 @@ alias pbcopy='xsel --clipboard --input'
 alias fd='fdfind'
 
 alias open='xdg-open'
+
+# nvimターミナル内でネストしないようにする
+if [[ -n $NVIM_LISTEN_ADDRESS ]] && type nvr &> /dev/null; then
+    alias nvim='nvr'
+fi
