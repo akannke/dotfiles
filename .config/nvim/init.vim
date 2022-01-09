@@ -26,14 +26,16 @@ nnoremap L $
 nnoremap 0 ^
 
 " クリップボードからコピペ
-nnoremap <A-y> "+y
-nnoremap <A-p> "+p
+noremap <A-y> "+y
+noremap <A-p> "+p
 
 " バッファの移動
 nnoremap <silent> <Up> :<C-u>bprev<CR>
 nnoremap <silent> <Down> :<C-u>bnext<CR>
 nnoremap <silent> ( :<C-u>bprev<CR>
 nnoremap <silent> ) :<C-u>bnext<CR>
+" バッファを閉じる
+nnoremap <silent> <A-b> :bd<CR>
 
 " 一時ファイルを作成して開く、OpenTempfileコマンドを定義
 command! Tempfile :edit `=tempname()`
@@ -126,6 +128,9 @@ nnoremap <A-h> <C-w>h
 nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
+" ウィンドウ拡大、縮小
+noremap <A-.> <C-w>>
+noremap <A-,> <C-w><
 
 " ================= coc.nvim =========================
 
@@ -287,3 +292,4 @@ au BufRead,BufNewFile */ansible/*.yml set filetype=yaml.ansible
 " ================= nvim-toggle-terminal ====================
 nnoremap <silent> <M-t> :ToggleTerminal<Enter>
 tnoremap <silent> <M-t> <C-\><C-n>:ToggleTerminal<Enter>
+let g:open_in_insert_mode = 0
