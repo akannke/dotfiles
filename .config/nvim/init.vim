@@ -117,7 +117,7 @@ let g:quickrun_config.haskell = {
       \ 'cmdopt': '-Wall'
       \ }
 
-tnoremap <Esc> <C-\><C-n>
+tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
 
 " Windowの切り替え. Alt+hjklで移動
 tnoremap <A-h> <C-\><C-n><C-w>h
