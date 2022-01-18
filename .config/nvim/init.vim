@@ -51,20 +51,20 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'vim-jp/vimdoc-ja'
 Plug 'pbogut/fzf-mru.vim'
 Plug 'itchyny/vim-haskell-indent'
-Plug 'simeji/winresizer'
+" Plug 'simeji/winresizer'
 Plug 'thinca/vim-quickrun'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'easymotion/vim-easymotion'
-Plug 'Rykka/riv.vim'
+" Plug 'Rykka/riv.vim'
 Plug 'thesis/vim-solidity'
-Plug 'sirtaj/vim-openscad'
+" Plug 'sirtaj/vim-openscad'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug '907th/vim-auto-save'
-Plug 'puremourning/vimspector'
+" Plug 'puremourning/vimspector'
 Plug 'sheerun/vim-polyglot'
 Plug 'sainnhe/gruvbox-material'
 Plug 'vyperlang/vim-vyper'
@@ -128,9 +128,15 @@ nnoremap <A-h> <C-w>h
 nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
+" 最後にアクティブだったWindowに戻る
+tnoremap <A-o> <C-\><C-n><C-w>p
+nnoremap <A-o> <C-w>p
 " ウィンドウ拡大、縮小
 noremap <A-.> <C-w>>
 noremap <A-,> <C-w><
+" 高さを増やす、減らす
+noremap <A-u> <C-w>+
+noremap <A-,> <C-w>-
 
 " ================= coc.nvim =========================
 
