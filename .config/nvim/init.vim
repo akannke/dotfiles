@@ -134,9 +134,8 @@ nnoremap <A-o> <C-w>p
 " ウィンドウ拡大、縮小
 noremap <A-.> <C-w>>
 noremap <A-,> <C-w><
-" 高さを増やす、減らす
-noremap <A-u> <C-w>+
-noremap <A-,> <C-w>-
+" 高さを増やす
+noremap <A-;> <C-w>+
 
 " ================= coc.nvim =========================
 
