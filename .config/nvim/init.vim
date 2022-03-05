@@ -28,6 +28,7 @@ nnoremap 0 ^
 " クリップボードからコピペ
 noremap <A-y> "+y
 noremap <A-p> "+p
+tnoremap <A-p> <C-\><C-n>"+pa
 
 " バッファの移動
 nnoremap <silent> <Up> :<C-u>bprev<CR>
