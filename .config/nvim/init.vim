@@ -105,12 +105,14 @@ map <Leader>k <Plug>(easymotion-overwin-line)
 
 " ============ vim-quickrunの設定 ==============
 let g:quickrun_no_default_key_mappings = 1
-nmap <leader>rr <Plug>(quickrun)
-let g:quickrun_config = {
-      \ '_' : {
-      \ 'outputter/buffer/split' : ':rightbelow 8sp'
+nmap <leader>n <Plug>(quickrun)
+let g:quickrun_config = get(g:, 'quickrun_config', {})
+let g:quickrun_config._ = {
+      \ 'outputter/buffer/opener': '10new',
+      \ 'outputter/buffer/into': 1,
+      \ 'outputter/buffer/close_on_empty': 1,
       \ }
-      \}
+
 let g:quickrun_config = {}
 let g:quickrun_config.haskell = {
       \ 'command' : 'runghc',
@@ -296,3 +298,9 @@ au BufRead,BufNewFile */ansible/*.yml set filetype=yaml.ansible
 nnoremap <silent> <M-t> :ToggleTerminal<Enter>
 tnoremap <silent> <M-t> <C-\><C-n>:ToggleTerminal<Enter>
 let g:open_in_insert_mode = 0
+
+" 括弧補完
+inoremap { {}<Left>
+inoremap ( ()<left>
+" ウィンドウを閉じずにバッファを閉じる
+noremap <silent> <Leader>b :bp<Bar>sp<Bar>bn<Bar>bd<CR>
