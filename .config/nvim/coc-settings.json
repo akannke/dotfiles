@@ -25,6 +25,7 @@
     }
   },
   "coc.preferences.formatOnSaveFiletypes": [
+    "javascript",
     "scala",
     "haskell",
     "go",
@@ -36,5 +37,7 @@
   "diagnostic.virtualText": true,
   "diagnostic.virtualTextCurrentLineOnly": false,
   "diagnostic.virtualTextPrefix": "‣ ",
-  "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/13.0.0/clangd_13.0.0/bin/clangd"
+  "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/13.0.0/clangd_13.0.0/bin/clangd",
+  "json.enable": true,
+  "json.format.enable": true
 }

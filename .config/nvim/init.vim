@@ -72,6 +72,7 @@ Plug 'vyperlang/vim-vyper'
 Plug 'pearofducks/ansible-vim'
 Plug 'tpope/vim-fugitive'
 Plug 'caenrique/nvim-toggle-terminal'  " ターミナルを切り替える
+Plug 'jiangmiao/auto-pairs'
 call plug#end()
 " ============= colorscheme =========
 if has('termguicolors')
@@ -300,7 +301,10 @@ tnoremap <silent> <M-t> <C-\><C-n>:ToggleTerminal<Enter>
 let g:open_in_insert_mode = 0
 
 " 括弧補完
-inoremap { {}<Left>
-inoremap ( ()<left>
+" inoremap { {}<Left>
+" inoremap " ""<Left>
+" inoremap < <><Left>
+" inoremap ( ()<left>
 " ウィンドウを閉じずにバッファを閉じる
 noremap <silent> <Leader>b :bp<Bar>sp<Bar>bn<Bar>bd<CR>
+inoremap <silent> <C-l> <ESC>f)i

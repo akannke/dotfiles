@@ -22,3 +22,8 @@ alias open='xdg-open'
 if [[ -n $NVIM_LISTEN_ADDRESS ]] && type nvr &> /dev/null; then
     alias nvim='nvr'
 fi
+
+# atcoder用のエイリアス
+if type cargo-compete >/dev/null 2>&1; then
+    alias co='cargo compete'
+fi
