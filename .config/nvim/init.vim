@@ -309,3 +309,7 @@ let g:open_in_insert_mode = 0
 " ウィンドウを閉じずにバッファを閉じる
 noremap <silent> <Leader>b :bp<Bar>sp<Bar>bn<Bar>bd<CR>
 inoremap <silent> <C-l> <ESC>f)i
+
+" ==================== auto-pairs ====================
+let g:AutoPairsMapCR = 0
+let g:AutoPairsMultilineClose = 0
