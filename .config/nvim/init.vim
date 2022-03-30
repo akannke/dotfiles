@@ -144,7 +144,8 @@ noremap <A-;> <C-w>+
 " ================= coc.nvim =========================
 
 let g:coc_global_extensions = [
-      \ 'coc-html', 'coc-css', 'coc-tsserver', 'coc-explorer', 'coc-docker', 'coc-git']
+      \ 'coc-html', 'coc-css', 'coc-tsserver', 'coc-explorer', 'coc-docker', 'coc-git',
+      \ 'coc-go', 'coc-rust-analyzer']
 
 " Give more space for displaying messages.
 set cmdheight=2
