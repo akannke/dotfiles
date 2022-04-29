@@ -12,6 +12,8 @@ set hidden
 set mouse=a
 set nobackup
 set nowritebackup
+set foldmethod=indent
+set foldlevel=100
 
 filetype plugin indent on
 
@@ -73,6 +75,11 @@ Plug 'pearofducks/ansible-vim'
 Plug 'tpope/vim-fugitive'
 Plug 'caenrique/nvim-toggle-terminal'  " ターミナルを切り替える
 Plug 'jiangmiao/auto-pairs'
+Plug 'jonathanfilip/vim-lucius'
+Plug 'ulwlu/elly.vim'
+Plug 'rakr/vim-two-firewatch'
+Plug 'AlessandroYorba/Despacio'
+Plug 'cocopon/iceberg.vim'
 call plug#end()
 " ============= colorscheme =========
 if has('termguicolors')
@@ -112,14 +119,14 @@ let g:quickrun_config._ = {
       \ 'outputter/buffer/opener': '10new',
       \ 'outputter/buffer/into': 1,
       \ 'outputter/buffer/close_on_empty': 1,
+      \ 'tempfile': '%{expand("%:p:h") . "/" . system("echo -n $(uuidgen)")}',
       \ }
-
-let g:quickrun_config = {}
-let g:quickrun_config.haskell = {
-      \ 'command' : 'runghc',
-      \ 'exec': ['%c %o %s'],
-      \ 'cmdopt': '-Wall'
-      \ }
+" 
+" let g:quickrun_config.haskell = {
+"       \ 'command' : 'runghc',
+"       \ 'exec': ['%c %o %s'],
+"       \ 'cmdopt': '-Wall'
+"       \ }
 
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
 
@@ -223,7 +230,7 @@ augroup mygroup
 augroup end
 
 " Applying codeAction
-nmap <leader>a  <Plug>(coc-codeaction-line)
+nmap <leader>a  <Plug>(coc-codeaction)
 xmap <leader>a  <Plug>(coc-codeaction-selected)
 
 " Apply AutoFix to problem on the current line.
@@ -297,8 +304,8 @@ set runtimepath^=~/coc-solidity/packages/coc-solidity
 au BufRead,BufNewFile */ansible/*.yml set filetype=yaml.ansible
 
 " ================= nvim-toggle-terminal ====================
-nnoremap <silent> <M-t> :ToggleTerminal<Enter>
-tnoremap <silent> <M-t> <C-\><C-n>:ToggleTerminal<Enter>
+nnoremap <silent> <Leader>t :ToggleTerminal<Enter>
+" tnoremap <silent> <Leader>t <C-\><C-n>:ToggleTerminal<Enter>
 let g:open_in_insert_mode = 0
 
 " 括弧補完
