@@ -80,6 +80,7 @@ Plug 'ulwlu/elly.vim'
 Plug 'rakr/vim-two-firewatch'
 Plug 'AlessandroYorba/Despacio'
 Plug 'cocopon/iceberg.vim'
+Plug 'nelstrom/vim-visual-star-search'
 call plug#end()
 " ============= colorscheme =========
 if has('termguicolors')
