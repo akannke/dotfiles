@@ -1,5 +1,18 @@
 {
   "languageserver": {
+    "solidity": {
+      "command": "solidity-language-server",
+      "args": [
+        "--stdio"
+      ],
+      "rootPatterns": [
+        ".git",
+        "package.json"
+      ],
+      "filetypes": [
+        "solidity"
+      ]
+    },
     "haskell": {
       "command": "haskell-language-server-wrapper",
       "args": [

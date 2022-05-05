@@ -60,7 +60,6 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'easymotion/vim-easymotion'
 " Plug 'Rykka/riv.vim'
-Plug 'thesis/vim-solidity'
 " Plug 'sirtaj/vim-openscad'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'maxmellon/vim-jsx-pretty'
