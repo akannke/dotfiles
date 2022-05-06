@@ -80,6 +80,7 @@ Plug 'rakr/vim-two-firewatch'
 Plug 'AlessandroYorba/Despacio'
 Plug 'cocopon/iceberg.vim'
 Plug 'nelstrom/vim-visual-star-search'
+Plug 'dense-analysis/ale'
 call plug#end()
 " ============= colorscheme =========
 if has('termguicolors')
@@ -320,3 +321,9 @@ inoremap <silent> <C-l> <ESC>f)i
 " ==================== auto-pairs ====================
 let g:AutoPairsMapCR = 0
 let g:AutoPairsMultilineClose = 0
+
+let g:ale_linters = {
+\   'solidity': ['solhint'],
+\}
+" linterを指定したときのみaleを有効化する
+let g:ale_linters_explicit = 1
