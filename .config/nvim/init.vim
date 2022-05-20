@@ -327,3 +327,6 @@ let g:ale_linters = {
 \}
 " linterを指定したときのみaleを有効化する
 let g:ale_linters_explicit = 1
+
+" User Commands
+command PathCopy let @g = expand('%')
