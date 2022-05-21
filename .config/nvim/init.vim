@@ -330,3 +330,4 @@ let g:ale_linters_explicit = 1
 
 " User Commands
 command PathCopy let @g = expand('%')
+command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
