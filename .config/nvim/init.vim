@@ -109,8 +109,6 @@ let g:auto_save_in_insert_mode = 0
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_do_mapping = 0
 nmap s <Plug>(easymotion-overwin-f)
-map <Leader>j <Plug>(easymotion-bd-jk)
-map <Leader>k <Plug>(easymotion-overwin-line)
 
 " ============ vim-quickrunの設定 ==============
 let g:quickrun_no_default_key_mappings = 1
@@ -199,6 +197,9 @@ endif
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
+nmap <silent> <Leader>j <Plug>(coc-diagnostic-next-error)
+nmap <silent> <Leader>k <Plug>(coc-diagnostic-prev-error)
+
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -268,10 +269,6 @@ nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
 nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols.
 nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
