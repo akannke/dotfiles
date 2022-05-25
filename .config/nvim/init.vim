@@ -85,7 +85,7 @@ Plug 'ddrscott/vim-window'  " windowのサイズを変えずにバッファの�
 call plug#end()
 " ============= colorscheme =========
 if has('termguicolors')
-    set termguicolors
+  set termguicolors
 endif
 let g:gruvbox_material_background = 'medium'
 colorscheme gruvbox-material
@@ -331,8 +331,8 @@ let g:AutoPairsMapCR = 0
 let g:AutoPairsMultilineClose = 0
 
 let g:ale_linters = {
-\   'solidity': ['solhint'],
-\}
+      \ 'solidity': ['solhint'],
+      \ }
 " linterを指定したときのみaleを有効化する
 let g:ale_linters_explicit = 1
 
