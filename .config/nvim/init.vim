@@ -81,6 +81,7 @@ Plug 'AlessandroYorba/Despacio'
 Plug 'cocopon/iceberg.vim'
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'dense-analysis/ale'
+Plug 'ddrscott/vim-window'  " windowのサイズを変えずにバッファのみ入れ替える
 call plug#end()
 " ============= colorscheme =========
 if has('termguicolors')
@@ -328,3 +329,7 @@ let g:ale_linters_explicit = 1
 " User Commands
 command PathCopy let @g = expand('%')
 command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
+
+" vim-window configurations
+nnoremap <C-w>x :<C-U>call window#exchange(v:count)<cr>
+nnoremap <C-w><C-x> :<C-U>call window#exchange(v:count)<cr>
