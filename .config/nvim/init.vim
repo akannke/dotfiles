@@ -81,7 +81,7 @@ Plug 'AlessandroYorba/Despacio'
 Plug 'cocopon/iceberg.vim'
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'dense-analysis/ale'
-Plug 'ddrscott/vim-window'  " windowのサイズを変えずにバッファのみ入れ替える
+Plug 'dstein64/vim-win' " windowのサイズを変えずにバッファのみ入れ替える
 call plug#end()
 " ============= colorscheme =========
 if has('termguicolors')
@@ -290,7 +290,7 @@ nmap <space>e :CocCommand explorer --sources=buffer+,file+<CR>
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " coc-metalsの設定
-nmap <Leader>ws <Plug>(coc-metals-expand-decoration)
+nmap <Leader>m <Plug>(coc-metals-expand-decoration)
 
 augroup SetFileType
   autocmd!
@@ -340,6 +340,9 @@ let g:ale_linters_explicit = 1
 command PathCopy let @g = expand('%')
 command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
 
-" vim-window configurations
-nnoremap <C-w>x :<C-U>call window#exchange(v:count)<cr>
-nnoremap <C-w><C-x> :<C-U>call window#exchange(v:count)<cr>
+" ========== vim-win ==========
+" swap buffer
+map <leader>wh <plug>WinWinsh<ESC>
+map <leader>wj <plug>WinWinsj<ESC>
+map <leader>wk <plug>WinWinsk<ESC>
+map <leader>wl <plug>WinWinsl<ESC>
