@@ -346,3 +346,8 @@ map <leader>wh <plug>WinWinsh<ESC>
 map <leader>wj <plug>WinWinsj<ESC>
 map <leader>wk <plug>WinWinsk<ESC>
 map <leader>wl <plug>WinWinsl<ESC>
+
+" ========== nvr ==========
+if has('nvim')
+  let $GIT_EDITOR = 'nvr -cc split --remote-wait'
+endif
