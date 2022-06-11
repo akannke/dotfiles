@@ -351,3 +351,7 @@ map <leader>wl <plug>WinWinsl<ESC>
 if has('nvim')
   let $GIT_EDITOR = 'nvr -cc split --remote-wait'
 endif
+
+" ==================== coc-git ====================
+nmap [c <Plug>(coc-git-prevchunk)
+nmap ]c <Plug>(coc-git-nextchunk)
