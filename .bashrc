@@ -10,14 +10,14 @@ esac
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
-HISTCONTROL=ignoreboth
+export HISTCONTROL=ignoreboth
 
 # append to the history file, don't overwrite it
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=100000
-HISTFILESIZE=200000
+export HISTSIZE=100000
+export HISTFILESIZE=100000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -152,7 +152,7 @@ share_history(){
     history -c
     history -r
 }
-PROMPT_COMMAND='share_history'
+export PROMPT_COMMAND='share_history'
 shopt -u histappend
 
 # fzf
@@ -173,8 +173,8 @@ fi
 
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/yushi/.sdkman"
-[[ -s "/home/yushi/.sdkman/bin/sdkman-init.sh" ]] && source "/home/yushi/.sdkman/bin/sdkman-init.sh"
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 if [[ -e "$HOME/.ghcup/env" ]]; then
     source ~/.ghcup/env
@@ -188,3 +188,5 @@ fi
 export PATH="$HOME/.local/bin:$PATH"
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+export PATH="$PATH:$HOME/.foundry/bin"
