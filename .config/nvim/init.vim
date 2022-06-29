@@ -33,8 +33,6 @@ noremap <A-p> "+p
 tnoremap <A-p> <C-\><C-n>"+pa
 
 " バッファの移動
-nnoremap <silent> <Up> :<C-u>bprev<CR>
-nnoremap <silent> <Down> :<C-u>bnext<CR>
 nnoremap <silent> ( :<C-u>bprev<CR>
 nnoremap <silent> ) :<C-u>bnext<CR>
 " バッファを閉じる
