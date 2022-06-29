@@ -9,6 +9,9 @@
 	br = branch
 	co = checkout
 	bl = blame
+	rs = restore
+	df = diff
+	cm = commit
 [pull]
 [merge]
 [pull]
