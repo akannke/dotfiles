@@ -82,6 +82,8 @@ Plug 'cocopon/iceberg.vim'
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'dense-analysis/ale'
 Plug 'dstein64/vim-win' " windowのサイズを変えずにバッファのみ入れ替える
+Plug 'rhysd/clever-f.vim'
+Plug 'Yggdroot/indentLine'
 call plug#end()
 " ============= colorscheme =========
 if has('termguicolors')
