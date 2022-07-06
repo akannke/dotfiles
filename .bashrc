@@ -199,3 +199,10 @@ function set-title() {
     TITLE="\[\e]2;$*\a\]"
     PS1=${ORIG}${TITLE}
 }
+
+# Run goland in the background
+if type -f goland >/dev/null 2>&1; then
+    function goland() {
+        $(type -f -p goland) "$1" >/dev/null 2>&1 &
+    }
+fi
