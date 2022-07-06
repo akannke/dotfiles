@@ -190,3 +190,12 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 export PATH="$PATH:$HOME/.foundry/bin"
+
+# set a tab title in gnome-terminal
+function set-title() {
+    if [[ -z "$ORIG" ]]; then
+        ORIG=$PS1
+    fi
+    TITLE="\[\e]2;$*\a\]"
+    PS1=${ORIG}${TITLE}
+}
