@@ -82,6 +82,7 @@ Plug 'dense-analysis/ale'
 Plug 'dstein64/vim-win' " windowのサイズを変えずにバッファのみ入れ替える
 Plug 'rhysd/clever-f.vim'
 Plug 'Yggdroot/indentLine'
+Plug 'moll/vim-bbye'
 call plug#end()
 " ============= colorscheme =========
 if has('termguicolors')
@@ -323,7 +324,7 @@ let g:open_in_insert_mode = 0
 " inoremap < <><Left>
 " inoremap ( ()<left>
 " ウィンドウを閉じずにバッファを閉じる
-noremap <silent> <Leader>b :bp<Bar>sp<Bar>bn<Bar>bd<CR>
+noremap <silent> <Leader>b :<C-u>Bdelete<CR>
 inoremap <silent> <C-l> <ESC>f)i
 
 " ==================== auto-pairs ====================
