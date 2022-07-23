@@ -14,6 +14,8 @@ set nobackup
 set nowritebackup
 set foldmethod=indent
 set foldlevel=100
+set noequalalways
+set number
 
 filetype plugin indent on
 
