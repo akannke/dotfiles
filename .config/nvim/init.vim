@@ -142,6 +142,9 @@ nnoremap <A-h> <C-w>h
 nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
+" 次のウィンドウに移動
+nnoremap <A-m> <C-w>w
+
 " 最後にアクティブだったWindowに戻る
 tnoremap <A-o> <C-\><C-n><C-w>p
 nnoremap <A-o> <C-w>p
