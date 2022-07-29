@@ -142,8 +142,6 @@ nnoremap <A-h> <C-w>h
 nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
-" 次のウィンドウに移動
-nnoremap <A-w> <C-w>w
 
 " 最後にアクティブだったWindowに戻る
 tnoremap <A-o> <C-\><C-n><C-w>p
@@ -291,6 +289,7 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " ディレクトリツリーを表示
 nmap <space>e :CocCommand explorer --sources=buffer+,file+<CR>
+nmap <C-e> :CocCommand explorer --sources=buffer+,file+<CR>
 
 " coc-pairsで改行時にカーソルを適切な位置に移動
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
@@ -348,10 +347,10 @@ command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
 
 " ========== vim-win ==========
 " swap buffer
-map <leader>wh <plug>WinWinsh<ESC>
-map <leader>wj <plug>WinWinsj<ESC>
-map <leader>wk <plug>WinWinsk<ESC>
-map <leader>wl <plug>WinWinsl<ESC>
+" map <leader>wh <plug>WinWinsh<ESC>
+" map <leader>wj <plug>WinWinsj<ESC>
+" map <leader>wk <plug>WinWinsk<ESC>
+" map <leader>wl <plug>WinWinsl<ESC>
 
 " ========== nvr ==========
 if has('nvim')
