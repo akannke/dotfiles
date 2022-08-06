@@ -1,3 +1,20 @@
+# zplug
+source ~/.zplug/init.zsh
+
+# plugins
+zplug "plugins/git", from:oh-my-zsh
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+# Then, source plugins and add commands to $PATH
+zplug load
+
 # Set up the prompt
 
 autoload -Uz promptinit
@@ -5,14 +22,15 @@ promptinit
 prompt adam1
 
 setopt histignorealldups sharehistory
+setopt share_history
 
 # Use emacs keybindings even if our EDITOR is set to vi
 bindkey -e
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
-HISTSIZE=1000
-SAVEHIST=1000
-HISTFILE=~/.zsh_history
+export HISTSIZE=100000
+export SAVEHIST=100000
+export HISTFILE=~/.zsh_history
 
 # Use modern completion system
 autoload -Uz compinit
