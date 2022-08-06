@@ -116,14 +116,48 @@ if ! shopt -oq posix; then
     fi
 fi
 
+# Prompt ----------------------------------------
+
+# コマンド履歴の同期
+share_history(){
+    history -a
+    history -c
+    history -r
+}
+export PROMPT_COMMAND=__prompt_command
+shopt -u histappend
+
+__prompt_command() {
+    local EXIT="$?"
+
+    local Reset='\[\e[0m\]'
+    local Red='\[\e[0;31m\]'
+    local Dollar
+    # turn $ red when command fails
+    if [[ $EXIT != 0 ]]; then
+        Dollar="${Red}\$${Reset}"
+    else
+        Dollar="$"
+    fi
+
+    PS1='\[\033[32m\]\u@\h \[\033[33m\]\w\[\033[36m\]$(__git_ps1)\[\033[0m\]\n'
+    PS1+="${Dollar} "
+
+    # set gnome-terminal tab title to current directory
+    local Title="\[\e]2;${PWD##*/}\a\]"
+    PS1+=$Title
+
+    share_history
+}
+
 # display git status
 source /etc/bash_completion.d/git-prompt
-export PS1='\[\033[32m\]\u@\h \[\033[33m\]\w\[\033[36m\]$(__git_ps1)\[\033[0m\]\n$ '
 GIT_PS1_SHOWDIRTYSTATE=true
 GIT_PS1_SHOWUNTRACKEDFILES=true
 GIT_PS1_SHOWSTASHSTATE=true
 GIT_PS1_SHOWUPSTREAM=auto
 
+# ----------------------------------------
 
 export PATH=$HOME/.local/bin:$PATH
 export PYENV_ROOT="$HOME/.pyenv"
@@ -145,15 +179,6 @@ if type go >/dev/null 2>&1; then
 fi
 
 stty stop undef
-
-# コマンド履歴の同期
-share_history(){
-    history -a
-    history -c
-    history -r
-}
-export PROMPT_COMMAND='share_history'
-shopt -u histappend
 
 # fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
@@ -191,14 +216,6 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 export PATH="$PATH:$HOME/.foundry/bin"
 
-# set a tab title in gnome-terminal
-function set-title() {
-    if [[ -z "$ORIG" ]]; then
-        ORIG=$PS1
-    fi
-    TITLE="\[\e]2;$*\a\]"
-    PS1=${ORIG}${TITLE}
-}
 
 # Run goland in the background
 if type -f goland >/dev/null 2>&1; then
