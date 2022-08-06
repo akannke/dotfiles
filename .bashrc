@@ -206,3 +206,7 @@ if type -f goland >/dev/null 2>&1; then
         $(type -f -p goland) "$1" >/dev/null 2>&1 &
     }
 fi
+
+if [[ -e ~/enhancd/init.sh ]]; then
+    source ~/enhancd/init.sh
+fi
