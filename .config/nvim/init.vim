@@ -124,7 +124,7 @@ let g:quickrun_config._ = {
       \ 'outputter/buffer/close_on_empty': 1,
       \ 'tempfile': '%{expand("%:p:h") . "/" . system("echo -n $(uuidgen)")}',
       \ }
-" 
+
 " let g:quickrun_config.haskell = {
 "       \ 'command' : 'runghc',
 "       \ 'exec': ['%c %o %s'],
@@ -165,7 +165,8 @@ let g:coc_global_extensions = [
       \ 'coc-rust-analyzer',
       \ 'coc-json',
       \ 'coc-vimlsp',
-      \ 'coc-yaml'
+      \ 'coc-yaml',
+      \ 'coc-pyright'
       \ ]
 
 " Give more space for displaying messages.
