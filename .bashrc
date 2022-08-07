@@ -124,31 +124,23 @@ share_history(){
     history -c
     history -r
 }
-export PROMPT_COMMAND=__prompt_command
 shopt -u histappend
 
-__prompt_command() {
-    local EXIT="$?"
+export PROMPT_COMMAND=share_history
+PS1='\[\033[32m\]\u@\h \[\033[33m\]\w\[\033[36m\]$(__git_ps1)\[\033[0m\]\n$(__dollar_sign) $(__gnome_terminal_title)'
 
-    local Reset='\[\e[0m\]'
-    local Red='\[\e[0;31m\]'
-    local Dollar
-    # turn $ red when command fails
-    if [[ $EXIT != 0 ]]; then
-        Dollar="${Red}\$${Reset}"
+__dollar_sign() {
+    if [[ $? != 0 ]]; then
+        printf "\033[0;31m$\033[0m"
     else
-        Dollar="$"
+        printf "$"
     fi
-
-    PS1='\[\033[32m\]\u@\h \[\033[33m\]\w\[\033[36m\]$(__git_ps1)\[\033[0m\]\n'
-    PS1+="${Dollar} "
-
-    # set gnome-terminal tab title to current directory
-    local Title="\[\e]2;${PWD##*/}\a\]"
-    PS1+=$Title
-
-    share_history
 }
+
+__gnome_terminal_title() {
+    printf "\e]2;${PWD##*/}\a"
+}
+
 
 # display git status
 source /etc/bash_completion.d/git-prompt
