@@ -127,20 +127,17 @@ share_history(){
 shopt -u histappend
 
 export PROMPT_COMMAND=share_history
-PS1='\[\033[32m\]\u@\h \[\033[33m\]\w\[\033[36m\]$(__git_ps1)\[\033[0m\]\n$(__dollar_sign) $(__gnome_terminal_title)'
+
+# gnome_terminal_title ...
+PS1='\[\033]2;\W\007\]\[\033[32m\]\u@\h \[\033[33m\]\w\[\033[36m\]$(__git_ps1)\[\033[0m\]\n$(__dollar_sign) '
 
 __dollar_sign() {
     if [[ $? != 0 ]]; then
-        printf "\033[0;31m$\033[0m"
+        printf "\e[0;31m\$\e[m"
     else
-        printf "$"
+        printf "\$"
     fi
 }
-
-__gnome_terminal_title() {
-    printf "\e]2;${PWD##*/}\a"
-}
-
 
 # display git status
 source /etc/bash_completion.d/git-prompt
@@ -178,12 +175,12 @@ export FZF_COMPLETION_TRIGGER="," # default: '**'
 # export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export PATH="$HOME/.cargo/bin:$PATH"
 
-[[ -s "$HOME/.autojump/etc/profile.d/autojump.sh" ]] && source "$HOME/.autojump/etc/profile.d/autojump.sh"
+# [[ -s "$HOME/.autojump/etc/profile.d/autojump.sh" ]] && source "$HOME/.autojump/etc/profile.d/autojump.sh"
 
-if [[ -f ~/fzf-tab-completion/bash/fzf-bash-completion.sh ]]; then
-    source ~/fzf-tab-completion/bash/fzf-bash-completion.sh
-    bind -x '"\t": fzf_bash_completion'
-fi
+# if [[ -f ~/fzf-tab-completion/bash/fzf-bash-completion.sh ]]; then
+#     source ~/fzf-tab-completion/bash/fzf-bash-completion.sh
+#     bind -x '"\t": fzf_bash_completion'
+# fi
 
 
 # 競プロ用プリコンパイル済みヘッダ
@@ -224,3 +221,19 @@ fi
 if [[ -e ~/enhancd/init.sh ]]; then
     source ~/enhancd/init.sh
 fi
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/abcd/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/abcd/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/abcd/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/abcd/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
