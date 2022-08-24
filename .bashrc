@@ -175,12 +175,12 @@ export FZF_COMPLETION_TRIGGER="," # default: '**'
 # export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export PATH="$HOME/.cargo/bin:$PATH"
 
-# [[ -s "$HOME/.autojump/etc/profile.d/autojump.sh" ]] && source "$HOME/.autojump/etc/profile.d/autojump.sh"
+[[ -s "$HOME/.autojump/etc/profile.d/autojump.sh" ]] && source "$HOME/.autojump/etc/profile.d/autojump.sh"
 
-# if [[ -f ~/fzf-tab-completion/bash/fzf-bash-completion.sh ]]; then
-#     source ~/fzf-tab-completion/bash/fzf-bash-completion.sh
-#     bind -x '"\t": fzf_bash_completion'
-# fi
+if [[ -f ~/fzf-tab-completion/bash/fzf-bash-completion.sh ]]; then
+    source ~/fzf-tab-completion/bash/fzf-bash-completion.sh
+    bind -x '"\t": fzf_bash_completion'
+fi
 
 
 # 競プロ用プリコンパイル済みヘッダ
