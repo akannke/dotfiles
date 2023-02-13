@@ -85,6 +85,8 @@ Plug 'dstein64/vim-win' " windowのサイズを変えずにバッファのみ入
 Plug 'rhysd/clever-f.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'moll/vim-bbye'
+" ============= colorschemes =========
+Plug 'KeitaNakamura/neodark.vim'
 call plug#end()
 " ============= colorscheme =========
 if has('termguicolors')
@@ -94,6 +96,23 @@ let g:gruvbox_material_background = 'medium'
 colorscheme gruvbox-material
 
 " ============= fzf ============
+
+"" 後方に貼り付け
+command! FzfPaste :call s:FzfPaste()
+function! s:FzfPaste()
+  let reg = execute(":reg")
+  let regs = split(reg, "\n")
+  call remove(regs, 0)
+  call fzf#run({'source': regs, 'sink': funcref('s:write'), 'down': '25%'})
+endfunction
+
+func! s:write(s) abort
+  execute ':norm ' . strcharpart(a:s,5,2) . 'p'
+endfunc
+
+" Setting fd as the default source for fzf
+let $FZF_DEFAULT_COMMAND = 'fd --type f'
+
 nnoremap [Fzf] <Nop>
 nmap <Leader>f [Fzf]
 nnoremap [Fzf]f :<C-u>Files<CR>
@@ -102,7 +121,7 @@ nnoremap [Fzf]h :<C-u>History<CR>
 nnoremap [Fzf]c :<C-u>Commands<CR>
 nnoremap [Fzf]m :<C-u>Maps<CR>
 nnoremap [Fzf]b :<C-u>Buffers<CR>
-
+nnoremap [Fzf]p :<C-u>FzfPaste<CR>
 
 " ============ vim-auto-save ===========
 let g:auto_save_silent = 1
@@ -111,8 +130,12 @@ let g:auto_save_in_insert_mode = 0
 " easy motion
 " 大文字小文字を区別しない
 let g:EasyMotion_smartcase = 1
+" 1を1と!にマッチするようにする
+let g:EasyMotion_use_smartsign_jp = 1
 let g:EasyMotion_do_mapping = 0
 nmap s <Plug>(easymotion-overwin-f)
+nmap m <Plug>(easymotion-overwin-f2)
+
 
 " ============ vim-quickrunの設定 ==============
 let g:quickrun_no_default_key_mappings = 1
