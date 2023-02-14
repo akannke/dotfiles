@@ -24,3 +24,6 @@ fi
 if type cargo-compete >/dev/null 2>&1; then
     alias co='cargo compete'
 fi
+
+# PATHを改行して表示
+alias mypath='echo $PATH | tr ":" "\n"'
