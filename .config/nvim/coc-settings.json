@@ -37,16 +37,9 @@
       }
     }
   },
-  "coc.preferences.formatOnSaveFiletypes": [
-    "javascript",
-    "typescript",
-    "scala",
-    "haskell",
-    "go",
-    "rust"
-  ],
   "python.jediEnabled": false,
   "codeLens.enable": true,
+  "codeLens.position": "eol",
   "diagnostic.enableMessage": "always",
   "diagnostic.virtualText": true,
   "diagnostic.virtualTextCurrentLineOnly": false,
@@ -61,5 +54,7 @@
     "solhint": {
       "command": "solhint"
     }
-  }
+  },
+  "tabnine.priority": 98,
+  "coc.preferences.formatOnSave": true
 }
