@@ -1,1 +1,5 @@
 nmap gr <Action>(GotoDeclaration)
+
+" バッファの移動
+nnoremap <silent> ( :<C-u>bprev<CR>
+nnoremap <silent> ) :<C-u>bnext<CR>
