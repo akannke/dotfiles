@@ -44,8 +44,14 @@ nnoremap <silent> <A-b> :bd<CR>
 command! Tempfile :edit `=tempname()`
 
 " pythonのパスを指定
-" let g:python_host_prog=$PYENV_ROOT.'/versions/neovim-2/bin/python'
-let g:python3_host_prog = system('echo -n $(which python3)')
+" venvでneovim用の仮想環境を作成して設定する
+let s:python3_dir = $HOME . '/.vim/python3'
+if !isdirectory(s:python3_dir)
+  call system('python -m venv ' . s:python3_dir)
+  " nvr, neovimをインストール
+  call system('source ' . s:python3_dir . '/bin/activate && pip install neovim neovim-remote')
+endif
+let g:python3_host_prog = s:python3_dir . '/bin/python'
 
 " ===== vim spector =====
 let g:vimspector_enable_mappings = 'HUMAN'
