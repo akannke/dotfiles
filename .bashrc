@@ -129,15 +129,7 @@ shopt -u histappend
 export PROMPT_COMMAND=share_history
 
 # gnome_terminal_title ...
-PS1='\[\033]2;\W\007\]\[\033[32m\]\u@\h \[\033[33m\]\w\[\033[36m\]$(__git_ps1)\[\033[0m\]\n$(__dollar_sign) '
-
-__dollar_sign() {
-    if [[ $? != 0 ]]; then
-        printf "\e[0;31m\$\e[m"
-    else
-        printf "\$"
-    fi
-}
+PS1='\[\033]2;\W\007\]\[\033[32m\]\u@\h \[\033[33m\]\w\[\033[36m\]$(__git_ps1)\[\033[0m\]\n$ '
 
 # display git status
 source /etc/bash_completion.d/git-prompt
