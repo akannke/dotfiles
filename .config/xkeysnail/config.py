@@ -9,7 +9,7 @@ from xkeysnail.transform import K, define_keymap, define_multipurpose_modmap
 # })
 
 # Emacs-like keybindings in non-Emacs applications
-define_keymap(lambda wm_class: wm_class not in ("Emacs", "URxvt"), {
+define_keymap(lambda wm_class: wm_class not in ("Emacs", "URxvt", "Gnome-terminal"), {
     K("C-h"): K("backspace"),
     K("C-d"): K("delete"),
     K("C-m"): K("enter")
