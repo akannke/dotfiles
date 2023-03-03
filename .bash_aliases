@@ -27,3 +27,4 @@ fi
 
 # PATHを改行して表示
 alias mypath='echo $PATH | tr ":" "\n"'
+alias open='xdg-open'
