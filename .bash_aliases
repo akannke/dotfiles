@@ -16,9 +16,11 @@ alias pbcopy='xsel --clipboard --input'
 alias open='xdg-open'
 
 # nvimターミナル内でネストしないようにする
-if [[ -n $NVIM_LISTEN_ADDRESS ]] && type nvr &> /dev/null; then
-    alias nvim='nvr'
+NVR_DIR="$HOME/.vim/python3/bin/nvr"
+if [[ -n $NVIM && -x $NVR_DIR ]] ; then
+    alias nvim="$NVR_DIR"
 fi
+unset NVR_DIR
 
 # atcoder用のエイリアス
 if type cargo-compete >/dev/null 2>&1; then
