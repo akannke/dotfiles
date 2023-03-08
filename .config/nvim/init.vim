@@ -16,6 +16,7 @@ set foldmethod=indent
 set foldlevel=100
 set noequalalways
 set number
+set equalalways
 
 filetype plugin indent on
 
@@ -127,6 +128,7 @@ nnoremap [Fzf]h :<C-u>History<CR>
 nnoremap [Fzf]c :<C-u>Commands<CR>
 nnoremap [Fzf]m :<C-u>Maps<CR>
 nnoremap [Fzf]b :<C-u>Buffers<CR>
+nnoremap [Fzf]j :<C-u>Buffers<CR>
 nnoremap [Fzf]p :<C-u>FzfPaste<CR>
 
 " ============ vim-auto-save ===========
@@ -195,7 +197,8 @@ let g:coc_global_extensions = [
       \ 'coc-json',
       \ 'coc-vimlsp',
       \ 'coc-yaml',
-      \ 'coc-pyright'
+      \ 'coc-pyright',
+      \ 'coc-snippets'
       \ ]
 
 " Give more space for displaying messages.
