@@ -26,6 +26,24 @@
 
 # For Cargo.toml
 snippet tokio "tokio full dependency" b
-tokio = { version = "1", features = ["full"] }
+tokio = { version = "1.26.0", features = ["full"] }
 $1
+endsnippet
+snippet tracing-subscriber "" b
+tracing-subscriber = { version = "0.3.16", features = ["fmt", "env-filter"] }
+endsnippet
+snippet serde "" b
+serde = "1.0"
+endsnippet
+snippet serde_json "" b
+serde_json = "1.0"
+endsnippet
+snippet clap "" b
+clap = { version = "4.1.8", features = ["derive"] }
+endsnippet
+snippet reth-network "" b
+reth-network = { git = "https://github.com/paradigmxyz/reth" }
+endsnippet
+snippet reth-network "" b
+jsonrpsee = { version = "0.16.2", features = ["full"] }
 endsnippet
