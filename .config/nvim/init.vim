@@ -123,13 +123,14 @@ let $FZF_DEFAULT_COMMAND = 'fd --type f'
 nnoremap [Fzf] <Nop>
 nmap <Leader>f [Fzf]
 nnoremap [Fzf]f :<C-u>Files<CR>
-nnoremap [Fzf]: :<C-u>History:<CR>
+nnoremap [Fzf]e :<C-u>History:<CR>
 nnoremap [Fzf]h :<C-u>History<CR>
 nnoremap [Fzf]c :<C-u>Commands<CR>
 nnoremap [Fzf]m :<C-u>Maps<CR>
 nnoremap [Fzf]b :<C-u>Buffers<CR>
 nnoremap [Fzf]j :<C-u>Buffers<CR>
 nnoremap [Fzf]p :<C-u>FzfPaste<CR>
+nnoremap [Fzf]s :<C-u>Snippets<CR>
 
 " ============ vim-auto-save ===========
 let g:auto_save_silent = 1
@@ -256,6 +257,12 @@ nmap <silent> gr <Plug>(coc-references)
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
+" less frequently used commands
+nnoremap [Coc] <Nop>
+nmap <Leader>i [Coc]
+nnoremap [Coc]l :<C-u>CocList snippets<CR>
+nnoremap [Coc]e :<C-u>CocCommand snippets.editSnippets<CR>
+
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
@@ -341,6 +348,12 @@ nnoremap <leader>l :<C-u>call CocActionAsync('codeLensAction')<CR>
 let g:airline_theme='wombat'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#ignore_bufadd_pat = 'defx|gundo|nerd_tree|startify|tagbar|undotree|vimfiler'
+let g:airline#extensions#tabline#buffers_label = 'b' " 右上の文字
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved' " 同じファイル名の時にパスを表示
+let g:airline#extensions#tabline#fnamemod = ':t'
+" let g:airline#extensions#tabline#fnametruncate = 0
+" let g:airline#extensions#tabline#buffer_min_count = 0
+let g:airline#extensions#tabline#fnamecollapse = 1
 let g:airline_powerline_fonts = 0
 
 " ================= coc-solidity ====================
@@ -392,3 +405,6 @@ endif
 " ==================== coc-git ====================
 nmap [c <Plug>(coc-git-prevchunk)
 nmap ]c <Plug>(coc-git-nextchunk)
+
+" ==================== indentLine ====================
+let g:indentLine_fileTypeExclude = ['markdown']
