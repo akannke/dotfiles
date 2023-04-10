@@ -348,13 +348,18 @@ nnoremap <leader>l :<C-u>call CocActionAsync('codeLensAction')<CR>
 let g:airline_theme='wombat'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#ignore_bufadd_pat = 'defx|gundo|nerd_tree|startify|tagbar|undotree|vimfiler'
-let g:airline#extensions#tabline#buffers_label = 'b' " 右上の文字
+let g:airline#extensions#tabline#buffers_label = '' " 右上の文字
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved' " 同じファイル名の時にパスを表示
 let g:airline#extensions#tabline#fnamemod = ':t'
 " let g:airline#extensions#tabline#fnametruncate = 0
 " let g:airline#extensions#tabline#buffer_min_count = 0
 let g:airline#extensions#tabline#fnamecollapse = 1
 let g:airline_powerline_fonts = 0
+let g:airline#extensions#tabline#show_tabs = 0
+let g:airline#extensions#tabline#show_tab_count = 0
+let g:airline#extensions#tabline#overflow_marker = '…'
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = ''
 
 " ================= coc-solidity ====================
 set runtimepath^=~/coc-solidity/packages/coc-solidity
