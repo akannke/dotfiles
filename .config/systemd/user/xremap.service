@@ -1,0 +1,12 @@
+ [Unit]
+ Description=xremap
+ 
+ [Service]
+ KillMode=process
+ ExecStart=/home/abcd/.cargo/bin/xremap /home/abcd/dotfiles/xremap.yml
+ Type=simple
+ Restart=always
+ RestartSec=10s
+
+ [Install]
+ WantedBy=default.target

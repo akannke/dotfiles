@@ -1,0 +1,6 @@
+keymap:
+  - name: Except terminal
+    application:
+      not: Gnome-terminal
+    remap:
+      C-h: backspace
