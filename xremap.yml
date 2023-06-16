@@ -4,3 +4,5 @@ keymap:
       not: Gnome-terminal
     remap:
       C-h: backspace
+      C-m: enter
+      C-d: delete
