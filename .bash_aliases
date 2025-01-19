@@ -30,3 +30,13 @@ fi
 # PATHを改行して表示
 alias mypath='echo $PATH | tr ":" "\n"'
 alias open='xdg-open'
+
+# python
+alias py='python'
+alias pyc='python -c'
+
+# git
+alias gst='git status'
+alias gd='git diff'
+
+alias cursor='~/Applications/cursor-0.40.3x86_64_0624b665a8721425564eff1bb6c8cc88.AppImage'

@@ -92,6 +92,8 @@ Plug 'dstein64/vim-win' " windowのサイズを変えずにバッファのみ入
 Plug 'rhysd/clever-f.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'moll/vim-bbye'
+Plug 'preservim/nerdtree'
+" Plug 'github/copilot.vim'
 " ============= colorschemes =========
 Plug 'KeitaNakamura/neodark.vim'
 call plug#end()
@@ -99,6 +101,7 @@ call plug#end()
 if has('termguicolors')
   set termguicolors
 endif
+" Available values: 'hard', 'medium'(default), 'soft'
 let g:gruvbox_material_background = 'medium'
 colorscheme gruvbox-material
 
@@ -123,7 +126,7 @@ let $FZF_DEFAULT_COMMAND = 'fd --type f'
 nnoremap [Fzf] <Nop>
 nmap <Leader>f [Fzf]
 nnoremap [Fzf]f :<C-u>Files<CR>
-nnoremap [Fzf]e :<C-u>History:<CR>
+nnoremap [Fzf]: :<C-u>History:<CR>
 nnoremap [Fzf]h :<C-u>History<CR>
 nnoremap [Fzf]c :<C-u>Commands<CR>
 nnoremap [Fzf]m :<C-u>Maps<CR>
@@ -413,3 +416,9 @@ nmap ]c <Plug>(coc-git-nextchunk)
 
 " ==================== indentLine ====================
 let g:indentLine_fileTypeExclude = ['markdown']
+
+augroup gvim_command
+  autocmd!
+  " フォーカスが外れたらノーマルモードに戻る
+  autocmd FocusLost * call feedkeys("\<esc>")
+augroup END

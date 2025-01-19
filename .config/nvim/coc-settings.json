@@ -26,6 +26,7 @@
     }
   },
   "python.jediEnabled": false,
+  "python.analysis.typeCheckingMode": "off",
   "codeLens.enable": true,
   "codeLens.position": "eol",
   "diagnostic.enableMessage": "always",
@@ -48,5 +49,8 @@
   "list.insertMappings": {
     "<C-n>": "normal:j",
     "<C-p>": "normal:k"
-  }
+  },
+  "rust-analyzer.procMacro.attributes.enable": true,
+  "rust-analyzer.diagnostics.disabled": ["unresolved-proc-macro"],
+  "prettier.disableLanguages": ["markdown"]
 }
