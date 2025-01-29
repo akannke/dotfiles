@@ -7,6 +7,7 @@
  Type=simple
  Restart=always
  RestartSec=10s
+ Environment=DISPLAY=:1
 
  [Install]
  WantedBy=default.target
